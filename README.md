@@ -33,7 +33,7 @@ It reflects what you repeatedly choose.
 ![preview](preview.png)
 
 ## About
-Created by **Cerafin C F (Cer_Pro)**  
+Created by **Cerafin C F**  
 With assistance from **ChatGPT (OpenAI)**  
 
 ## Note
