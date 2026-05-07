@@ -1,7 +1,7 @@
 @echo off
 setlocal EnableExtensions EnableDelayedExpansion
 title Choose_This_Day
-
+mode con: cols=90 lines=30
 rem =========================================
 rem Created by Cerafin C F
 rem Project: Choose_This_Day
@@ -32,20 +32,23 @@ goto intro
 rem ================= INTRO =================
 :intro
 cls
-call :say "this is not a loud script." 1
-call :say "it stays quiet.." 1
-call :say "it only watches a routine form and weaken." 1
-call :say "the story continues depending on your choices" 1
-call :say "each step makes sense at last" 1
-call :say "it prints text and waits for a choice." 1
-call :say "that is enough to tell a story." 1
-
-set /p name=your name: 
+call :say "every day starts the same way." 1
+timeout /t 3 >nul
+call :say "small choices." 1
+timeout /t 2 >nul
+call :say "small delays." 1
+timeout /t 1 >nul
+call :say "most people never notice the pattern." 1
+timeout /t 2 >nul
+call :say "but this story does." 1
+timeout /t 4 >nul
+set /p name=Btw your name: 
 cls
 
 call :say "all right, %name%." 1
-call :say "now watch what repeats." 1
-
+timeout /t 2 >nul
+call :say "now watch what happens. Its a story about a teen" 1
+timeout /t 4 >nul
 goto day_start
 
 rem ================= DAY FLOW =================
@@ -61,21 +64,36 @@ goto evaluate
 
 rem ================= FRIDAY =================
 :friday
+
 call :say "friday arrives like a door that is already half open." 1
+timeout /t 3 >nul
 call :say "the week is tired." 1
+timeout /t 2 >nul
 call :say "the mind is tired too." 1
+timeout /t 2 >nul
 call :say "school, phone, home, sleep." 1
-call :say "the pattern is still pretending to be normal." 1
+timeout /t 1 >nul
+call :say "nothing about the day seems important yet." 1
+timeout /t 3 >nul
+call :say "-" 1
+call :say "-" 1
+call :say "[Morning | 6.00 AM]" 1
+timeout /t 2 >nul
 
 goto weekday_flow
 
 rem ================= SATURDAY =================
 :saturday
 call :say "saturday comes without a bell." 1
+timeout /t 2 >nul
 call :say "there is no school to hide behind." 1
+timeout /t 3 >nul
 call :say "the day stretches out." 1
-
-call :say "/ when there is space, habits become visible. /" 1
+call :say "-" 1
+call :say "-" 1
+timeout /t 2 >nul
+call :say "[Morning | 6.00 AM]" 1
+timeout /t 2 >nul
 
 call :shuffle_sat_morning
 echo.
@@ -92,14 +110,23 @@ call set "real=%%map!pick!%%"
 
 call :repeat_check weekend_morning !real!
 
-if !real!==1 (set /a good_total+=1 & call :comment_good & call :say "he moves before the excuse can grow." 1)
-if !real!==2 (set /a bad_total+=1 & call :comment_bad & call :say "he watches time pass and calls it rest." 1)
-if !real!==3 (set /a bad_total+=1 & call :comment_bad & call :say "he lets the morning go untouched." 1)
+if !real!==1 (set /a good_total+=1 & call :comment_good & call :say "he moves before the excuse can grow." 1 & call :narrator)
+if !real!==2 (set /a bad_total+=1 & call :comment_bad & call :say "he watches time pass and calls it rest." 1 & call :narrator)
+if !real!==3 (set /a bad_total+=1 & call :comment_bad & call :say "he lets the morning go untouched." 1 & call :narrator  )
+
+
 
 goto saturday_evening
 
 :saturday_evening
-call :say "evening comes without asking permission." 1
+call :say "-" 1
+call :say "-" 1
+call :say "Later that day" 1
+timeout /t 1 >nul
+call :say "[Evening | 5.00PM]" 1
+timeout /t 2 >nul
+call :say "evening comes." 1
+timeout /t 1 >nul
 call :say "the day is still there, but thinner now." 1
 
 call :shuffle_sat_evening
@@ -117,17 +144,20 @@ call set "real=%%map!pick!%%"
 
 call :repeat_check weekend_evening !real!
 
-if !real!==1 (set /a good_total+=1 & call :comment_good & call :say "he prepares while there is still time to prepare." 1)
-if !real!==2 (set /a bad_total+=1 & call :comment_bad & call :say "he delays again, as if delay is harmless." 1)
-if !real!==3 (set /a bad_total+=1 & call :comment_bad & call :say "he chooses silence over change." 1)
+if !real!==1 (set /a good_total+=1 & call :comment_good & call :say "he prepares while there is still time to prepare." 1 & call :narrator )
+if !real!==2 (set /a bad_total+=1 & call :comment_bad & call :say "he delays again, as if delay is harmless." 1  & call :narrator)
+if !real!==3 (set /a bad_total+=1 & call :comment_bad & call :say "he chooses silence over change." 1 & call :narrator)
 
 goto night
 
 rem ================= SUNDAY =================
 :sunday
-call :say "sunday is quieter." 1
-call :say "quiet does not mean clean." 1
-call :say "it only means the noise has moved inside." 1
+call :say "sunday is quieter than the rest." 1
+timeout /t 2 >nul
+call :say "but quiet does not mean peace." 1
+timeout /t 3 >nul
+call :say "sometimes it just means nothing is happening outside." 1
+
 
 call :shuffle_sun_morning
 echo.
@@ -144,15 +174,16 @@ call set "real=%%map!pick!%%"
 
 call :repeat_check weekend_morning !real!
 
-if !real!==1 (set /a good_total+=1 & call :comment_good & call :say "he reflects before the thought escapes." 1)
-if !real!==2 (set /a bad_total+=1 & call :comment_bad & call :say "he distracts himself and calls it balance." 1)
-if !real!==3 (set /a bad_total+=1 & call :comment_bad & call :say "he looks away from the thing that matters." 1)
+if !real!==1 (set /a good_total+=1 & call :comment_good & call :say "he reflects before the thought escapes." 1 & call :narrator)
+if !real!==2 (set /a bad_total+=1 & call :comment_bad & call :say "he distracts himself and calls it balance." 1 & call :narrator)
+if !real!==3 (set /a bad_total+=1 & call :comment_bad & call :say "he looks away from the thing that matters." 1 & call :narrator)
 
 goto sunday_night
 
 :sunday_night
 call :say "night arrives." 1
 call :say "the week stands there in pieces." 1
+timeout /t 2 >nul
 call :say "something has been learned." 1
 goto evaluate
 
@@ -160,12 +191,16 @@ rem ================= WEEKDAY FLOW =================
 :weekday_flow
 call :say "morning starts before he is ready for it." 1
 call :say "the alarm ends." 1
+timeout /t 1 >nul
 call :say "the phone begins." 1
+timeout /t 2 >nul
 call :say "one habit enters before the others can defend themselves." 1
+timeout /t 1 >nul
 
 call :shuffle_morning
 echo.
-echo what happens?
+echo what does he do?[type the choice number]
+timeout /t 1 >nul
 echo.
 echo    1. !opt1!
 echo    2. !opt2!
@@ -178,15 +213,17 @@ call set "real=%%map!pick!%%"
 
 call :repeat_check morning !real!
 
-if !real!==1 (set /a good_total+=1 & call :comment_good & call :say "he gets up before the loop fully closes." 1)
-if !real!==2 (set /a bad_total+=1 & call :comment_bad & call :say "he stays half-awake and fully delayed." 1)
-if !real!==3 (set /a bad_total+=1 & call :comment_bad & call :say "he remains where the habit left him." 1)
+if !real!==1 (set /a good_total+=1 & call :comment_good & call :say "he gets up before the loop fully closes." 1 & call :narrator)
+if !real!==2 (set /a bad_total+=1 & call :comment_bad & call :say "he stays half-awake and fully delayed." 1 & call :narrator)
+if !real!==3 (set /a bad_total+=1 & call :comment_bad & call :say "he remains where the habit left him." 1 & call :narrator )
 
 goto school
 
 :school
 call :say "school feels the same from the outside." 1
+timeout /t 3 >nul
 call :say "inside, a task is waiting." 1
+timeout /t 1 >nul
 call :say "unfinished things always wait more loudly." 1
 
 call :shuffle_school
@@ -204,18 +241,19 @@ call set "real=%%map!pick!%%"
 
 call :repeat_check school !real!
 
-if !real!==1 (set /a good_total+=1 & call :comment_good & call :say "he clears it now and removes the weight from later." 1)
-if !real!==2 (set /a bad_total+=1 & call :comment_bad & call :say "he saves it for later, and later becomes heavier." 1)
-if !real!==3 (set /a bad_total+=1 & call :comment_bad & call :say "he drops it from sight, not from consequence." 1)
+if !real!==1 (set /a good_total+=1 & call :comment_good & call :say "he clears it now and removes the weight from later." 1 & call :narrator )
+if !real!==2 (set /a bad_total+=1 & call :comment_bad & call :say "he saves it for later, and later becomes heavier." 1 & call :narrator )
+if !real!==3 (set /a bad_total+=1 & call :comment_bad & call :say "he drops it from sight, not from consequence." 1 & call :narrator )
 
 goto night
 
 rem ================= NIGHT =================
 :night
 call :say "night returns with the same face." 1
-call :say "tomorrow i will fix it." 1
+call :say "He says - tomorrow is my day." 1
 call :say "the sentence is familiar." 1
 call :say "familiar is not the same as true." 1
+timeout /t 5 >nul
 goto day_start
 
 rem ================= EVALUATION =================
@@ -250,14 +288,55 @@ if %bad_total%==2 call :say "/ it happens again. /" 1
 if %bad_total% GEQ 4 call :say "/ it is easier each time. /" 1
 exit /b
 
+rem ================= NARRATOR =================
+:narrator
+set /a mood=%good_total%-%bad_total%
+
+if %mood% GEQ 2 goto narrator_hopeful
+if %mood% LEQ -2 goto narrator_heavy
+goto narrator_calm
+
+:narrator_calm
+set /a nr=%random%%%5
+
+if %nr%==0 call :say "[ the choice passes quietly. ]" 1
+if %nr%==1 call :say "[ most habits never announce themselves. ]" 1
+if %nr%==2 call :say "[ another small decision joins the pattern. ]" 1
+if %nr%==3 call :say "[ routines grow before people notice them. ]" 1
+if %nr%==4 call :say "[ nothing feels serious yet. ]" 1
+
+exit /b
+
+:narrator_heavy
+set /a nr=%random%%%5
+
+if %nr%==0 call :say "[ it becomes easier to repeat than resist. ]" 1
+if %nr%==1 call :say "[ the excuse arrives faster this time. ]" 1
+if %nr%==2 call :say "[ he already knows where this choice leads. ]" 1
+if %nr%==3 call :say "[ delay is starting to feel natural. ]" 1
+if %nr%==4 call :say "[ habits survive when nobody interrupts them. ]" 1
+
+exit /b
+
+:narrator_hopeful
+set /a nr=%random%%%5
+
+if %nr%==0 call :say "[ something is changing slowly. ]" 1
+if %nr%==1 call :say "[ discipline rarely looks dramatic. ]" 1
+if %nr%==2 call :say "[ small corrections still matter. ]" 1
+if %nr%==3 call :say "[ the routine bends a little. ]" 1
+if %nr%==4 call :say "[ better choices are becoming less unfamiliar. ]" 1
+
+exit /b
+
 rem ================= SHUFFLES =================
 :shuffle_morning
 set "map1=1"
 set "map2=2"
 set "map3=3"
-set "opt1=he gets up now because waiting only makes the day sharper later"
-set "opt2=he scrolls a little longer because the first minutes feel soft"
-set "opt3=he stays in bed because staying is easier than starting"
+set "opt1=he gets out of bed and starts the day"
+set "opt2=he stays on his phone for a few more minutes"
+set "opt3=he keeps lying there, telling himself he will start soon"
 call :swap
 call :swap
 exit /b
@@ -266,9 +345,9 @@ exit /b
 set "map1=1"
 set "map2=2"
 set "map3=3"
-set "opt1=he does it now because unfinished work follows him anyway"
-set "opt2=he leaves it for later because later still feels distant"
-set "opt3=he ignores it because it feels smaller than his mood"
+set "opt1=he finishes the task now and gets it off his mind"
+set "opt2=he pushes it aside and says he will do it later"
+set "opt3=he pushes it away and hopes it won't matter much."
 call :swap
 call :swap
 exit /b
@@ -277,9 +356,9 @@ exit /b
 set "map1=1"
 set "map2=2"
 set "map3=3"
-set "opt1=he starts something he has been postponing"
-set "opt2=he watches the morning fade from behind a screen"
-set "opt3=he goes back to sleep and gives the day away"
+set "opt1=he uses the morning to do something he has been putting off"
+set "opt2=he scrolls through his phone and lets the morning slip by"
+set "opt3=he goes back to sleep and pushes his chores out of his mind"
 call :swap
 call :swap
 exit /b
@@ -288,9 +367,9 @@ exit /b
 set "map1=1"
 set "map2=2"
 set "map3=3"
-set "opt1=he prepares for tomorrow before tomorrow starts demanding"
-set "opt2=he delays again and pretends there is time to spare"
-set "opt3=he ignores it completely and trusts luck"
+set "opt1=he gets things ready for tomorrow before it gets late"
+set "opt2=he keeps delaying it and tells himself there is still time"
+set "opt3=he does nothing and hopes tomorrow will be easier"
 call :swap
 call :swap
 exit /b
@@ -299,25 +378,28 @@ exit /b
 set "map1=1"
 set "map2=2"
 set "map3=3"
-set "opt1=he reflects and lets the silence say something honest"
-set "opt2=he distracts himself until the feeling dulls"
-set "opt3=he avoids it and calls the escape peace"
+set "opt1=he thinks things through and listens to his own thoughts"
+set "opt2=he distracts himself so he does not have to think too much"
+set "opt3=he avoids it completely and calls that peace"
 call :swap
 call :swap
 exit /b
-
 :swap
 set /a r1=!random!%%3+1
 set /a r2=!random!%%3+1
+
 for %%A in (!r1!) do for %%B in (!r2!) do (
     call set "t=%%map%%A%%"
     call set "map%%A=%%map%%B%%"
     set "map%%B=!t!"
+
     call set "t=%%opt%%A%%"
     call set "opt%%A=%%opt%%B%%"
     set "opt%%B=!t!"
 )
+
 exit /b
+
 
 rem ================= TYPE =================
 :say
@@ -326,8 +408,8 @@ set "msg=%~1"
 set /a i=0
 
 rem base speed ranges
-set "min=25"
-set "max=85"
+set "min=60"
+set "max=150"
 
 :loop
 set "ch=!msg:~%i%,1!"
@@ -379,27 +461,37 @@ rem ================= ENDINGS =================
 :loop_end
 cls
 call :say "nothing broke the pattern." 1
+timeout /t 3 >nul
 call :say "not once." 1
+timeout /t 2 >nul
 call :say "not even when it was clearly visible." 1
+timeout /t 3 >nul
 call :say "the same choices returned, again and again," 1
+timeout /t 1 >nul
 call :say "until they stopped feeling like choices at all." 1
 call :say "they became default." 1
 call :say "automatic." 1
-call :say "quiet." 1
+call :say "quiet.and..." 1
+timeout /t 2 >nul
 call :say "dangerous." 1
-call :say "." 1
+timeout /t 3 >nul
 call :say "time moved forward." 1
 call :say "but nothing inside him moved with it." 1
+timeout /t 3 >nul
 call :say "days passed." 1
+timeout /t 1 >nul
 call :say "then weeks." 1
+timeout /t 1 >nul
 call :say "and the pattern remained untouched." 1
-call :say "." 1
+timeout /t 3 >nul
 call :say "he once said: tomorrow i will fix it." 1
 call :say "now even that sentence is gone." 1
+timeout /t 3 >nul
 call :say "this is how it happens." 1
 call :say "not with failure." 1
 call :say "but with repetition." 1
-call :say "-“The soul of the sluggard craves and gets nothing, while the soul of the diligent is richly supplied.”- (Proverbs 13:4)" 1
+timeout /t 3 >nul
+call :say "-The soul of the sluggard craves and gets nothing, while the soul of the diligent is richly supplied.- (Proverbs 13:4)" 1
 pause
 cls
 call :credits
@@ -409,26 +501,32 @@ exit
 :disciplined_end
 cls
 call :say "something changed." 1
+timeout /t 3 >nul
 call :say "it was small enough to ignore." 1
 call :say "but it was not ignored." 1
-call :say "." 1
+timeout /t 3 >nul
 call :say "a single moment resisted the pattern." 1
 call :say "then another." 1
 call :say "not perfectly." 1
+timeout /t 2 >nul
 call :say "not consistently." 1
 call :say "but enough." 1
-call :say "." 1
+timeout /t 3 >nul
 call :say "discipline did not arrive as motivation." 1
+timeout /t 2 >nul
 call :say "it arrived as interruption." 1
 call :say "a break in the automatic." 1
-call :say "." 1
+timeout /t 3 >nul
 call :say "the delay was not allowed to win every time." 1
 call :say "and that was new." 1
+timeout /t 3 >nul
 call :say "this is how it begins." 1
 call :say "quiet." 1
-call :say "unnoticed." 1
+call :say "unnoticed.." 1
+timeout /t 2 >nul
 call :say "but real." 1
-call :say "-“God gave us a spirit not of fear but of power… and self-control.”- (2 Timothy 1:7)" 1
+timeout /t 3 >nul
+call :say "-God gave us a spirit not of fear but of power… and self-control.- (2 Timothy 1:7)" 1
 pause
 cls
 call :credits
@@ -439,34 +537,37 @@ exit
 cls
 call :say "it is not fixed." 1
 call :say "that much is clear." 1
-call :say "." 1
+timeout /t 3 >nul
 call :say "some choices resisted." 1
 call :say "some choices repeated." 1
 call :say "the pattern cracked," 1
 call :say "but did not break." 1
-call :say "." 1
+timeout /t 3 >nul
 call :say "he noticed it now." 1
 call :say "that is the difference." 1
 call :say "what was invisible is now seen." 1
-call :say "." 1
+timeout /t 3 >nul
 call :say "and that is uncomfortable." 1
 call :say "because now every delay feels deliberate." 1
 call :say "every repeat feels chosen." 1
-call :say "." 1
+timeout /t 3 >nul
 call :say "this is the middle." 1
 call :say "not failure." 1
 call :say "not victory." 1
 call :say "but awareness." 1
 call :say "and awareness does not let you go back unchanged." 1
-call :say "-“You are neither cold nor hot… because you are lukewarm, I will spit you out.”-(Revelation 3:15–16)" 1
+timeout /t 3 >nul
+call :say "-You are neither cold nor hot… because you are lukewarm, I will spit you out.-(Revelation 3:15–16)" 1
 pause
 cls
 call :credits
 exit
 rem ================= CREDITS =================
 :credits
-call :say "hey %name%, you have completed this story successfully. Btw this story's ending differs from person to person." 1
-call :say "credits" 1
+call :say "this story is fictional. none of these events are real, and any similarity is purely coincidental." 1
+call :say "-Twenty years from now you will be more disappointed by the things that you didn't do than by the ones you did do. So throw off the bowlines. Sail away from the safe harbor. Catch the trade winds in your sails. Explore. Dream. Discover. - Unknown" 1
+call :say "hey %name%, officially this story is over here... but.. your story starts from here. Btw this story's ending differs from person to person." 1
+call :say "Credits" 1
 call :say "First of All, im Thanking God." 1
 call :say "“Through Jesus, this creation was made possible.”" 1
 call :say "concept, design, narrative:" 1
