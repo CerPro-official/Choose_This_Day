@@ -26,7 +26,15 @@ It reflects what you repeatedly choose.
 - Multiple endings  
 - Repetition detection  
 - Dynamic narrative feedback  
-- Realistic typing effect  
+- Realistic typing effect
+
+  ## Compatibility
+
+This project is designed for Windows Command Prompt (`.bat`).
+
+Tested on:
+- Windows 10
+- Windows 11
 
 ## Preview
 
