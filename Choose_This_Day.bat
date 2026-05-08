@@ -223,8 +223,9 @@ goto school
 call :say "school feels the same from the outside." 1
 timeout /t 3 >nul
 call :say "inside, a task is waiting." 1
-timeout /t 1 >nul
+timeout /t 2 >nul
 call :say "unfinished things always wait more loudly." 1
+timeout /t 1 >nul
 
 call :shuffle_school
 echo.
@@ -310,11 +311,11 @@ exit /b
 :narrator_heavy
 set /a nr=%random%%%5
 
-if %nr%==0 call :say "[ it becomes easier to repeat than resist. ]" 1
-if %nr%==1 call :say "[ the excuse arrives faster this time. ]" 1
-if %nr%==2 call :say "[ he already knows where this choice leads. ]" 1
-if %nr%==3 call :say "[ delay is starting to feel natural. ]" 1
-if %nr%==4 call :say "[ habits survive when nobody interrupts them. ]" 1
+if %nr%==0 call :popup "[ it becomes easier to repeat than resist. ]" 1
+if %nr%==1 call :popup "[ the excuse arrives faster this time. ]" 1
+if %nr%==2 call :popup "[ he already knows where this choice leads. ]" 1
+if %nr%==3 call :popup "[ delay is starting to feel natural. ]" 1
+if %nr%==4 call :popup "[ habits survive when nobody interrupts them. ]" 1
 
 exit /b
 
@@ -400,6 +401,17 @@ for %%A in (!r1!) do for %%B in (!r2!) do (
 
 exit /b
 
+rem ================= POPUP NARRATOR =================
+:popup
+setlocal
+set "msg=%~1"
+
+>nul powershell -Command ^
+Add-Type -AssemblyName PresentationFramework; ^
+[System.Windows.MessageBox]::Show('%msg%','Choose_This_Day','OK','Warning')
+
+endlocal
+exit /b
 
 rem ================= TYPE =================
 :say
@@ -539,21 +551,29 @@ call :say "it is not fixed." 1
 call :say "that much is clear." 1
 timeout /t 3 >nul
 call :say "some choices resisted." 1
+timeout /t 2 >nul
 call :say "some choices repeated." 1
 call :say "the pattern cracked," 1
+timeout /t 2 >nul
 call :say "but did not break." 1
 timeout /t 3 >nul
 call :say "he noticed it now." 1
+timeout /t 1 >nul
 call :say "that is the difference." 1
+timeout /t 2 >nul
 call :say "what was invisible is now seen." 1
 timeout /t 3 >nul
 call :say "and that is uncomfortable." 1
+timeout /t 2 >nul
 call :say "because now every delay feels deliberate." 1
+timeout /t 1 >nul
 call :say "every repeat feels chosen." 1
 timeout /t 3 >nul
 call :say "this is the middle." 1
 call :say "not failure." 1
+timeout /t 2 >nul
 call :say "not victory." 1
+timeout /t 2 >nul
 call :say "but awareness." 1
 call :say "and awareness does not let you go back unchanged." 1
 timeout /t 3 >nul
