@@ -23,7 +23,7 @@ set "last_weekend_evening="
 
 cls
 echo loading...
-timeout /t 2 >nul
+timeout /t 3 >nul
 cls
 
 
@@ -41,7 +41,7 @@ timeout /t 1 >nul
 call :say "most people never notice the pattern." 1
 timeout /t 2 >nul
 call :say "but this story does." 1
-timeout /t 4 >nul
+timeout /t 3 >nul
 set /p name=Btw your name: 
 cls
 
@@ -110,9 +110,9 @@ call set "real=%%map!pick!%%"
 
 call :repeat_check weekend_morning !real!
 
-if !real!==1 (set /a good_total+=1 & call :comment_good & call :say "he moves before the excuse can grow." 1 & call :narrator)
-if !real!==2 (set /a bad_total+=1 & call :comment_bad & call :say "he watches time pass and calls it rest." 1 & call :narrator)
-if !real!==3 (set /a bad_total+=1 & call :comment_bad & call :say "he lets the morning go untouched." 1 & call :narrator  )
+if !real!==1 (set /a good_total+=1 & call :comment_good & call :say "he moves before the excuse can grow." 1 & call :narrator !real!)
+if !real!==2 (set /a bad_total+=1 & call :comment_bad & call :say "he watches time pass and calls it rest." 1 & call :narrator !real!)
+if !real!==3 (set /a bad_total+=1 & call :comment_bad & call :say "he lets the morning go untouched." 1 & call :narrator !real! )
 
 
 
@@ -144,9 +144,9 @@ call set "real=%%map!pick!%%"
 
 call :repeat_check weekend_evening !real!
 
-if !real!==1 (set /a good_total+=1 & call :comment_good & call :say "he prepares while there is still time to prepare." 1 & call :narrator )
-if !real!==2 (set /a bad_total+=1 & call :comment_bad & call :say "he delays again, as if delay is harmless." 1  & call :narrator)
-if !real!==3 (set /a bad_total+=1 & call :comment_bad & call :say "he chooses silence over change." 1 & call :narrator)
+if !real!==1 (set /a good_total+=1 & call :comment_good & call :say "he prepares while there is still time to prepare." 1 & call :narrator !real!)
+if !real!==2 (set /a bad_total+=1 & call :comment_bad & call :say "he delays again, as if delay is harmless." 1  & call :narrator !real!)
+if !real!==3 (set /a bad_total+=1 & call :comment_bad & call :say "he chooses silence over change." 1 & call :narrator !real!)
 
 goto night
 
@@ -157,7 +157,11 @@ timeout /t 2 >nul
 call :say "but quiet does not mean peace." 1
 timeout /t 3 >nul
 call :say "sometimes it just means nothing is happening outside." 1
-
+timeout /t 2 >nul
+call :say "-" 1
+call :say "-" 1
+call :say "[Morning | 6.00 AM]" 1
+timeout /t 2 >nul
 
 call :shuffle_sun_morning
 echo.
@@ -174,9 +178,9 @@ call set "real=%%map!pick!%%"
 
 call :repeat_check weekend_morning !real!
 
-if !real!==1 (set /a good_total+=1 & call :comment_good & call :say "he reflects before the thought escapes." 1 & call :narrator)
-if !real!==2 (set /a bad_total+=1 & call :comment_bad & call :say "he distracts himself and calls it balance." 1 & call :narrator)
-if !real!==3 (set /a bad_total+=1 & call :comment_bad & call :say "he looks away from the thing that matters." 1 & call :narrator)
+if !real!==1 (set /a good_total+=1 & call :comment_good & call :say "he reflects before the thought escapes." 1 & call :narrator !real!)
+if !real!==2 (set /a bad_total+=1 & call :comment_bad & call :say "he distracts himself and calls it balance." 1 & call :narrator !real!)
+if !real!==3 (set /a bad_total+=1 & call :comment_bad & call :say "he looks away from the thing that matters." 1 & call :narrator !real!)
 
 goto sunday_night
 
@@ -213,9 +217,9 @@ call set "real=%%map!pick!%%"
 
 call :repeat_check morning !real!
 
-if !real!==1 (set /a good_total+=1 & call :comment_good & call :say "he gets up before the loop fully closes." 1 & call :narrator)
-if !real!==2 (set /a bad_total+=1 & call :comment_bad & call :say "he stays half-awake and fully delayed." 1 & call :narrator)
-if !real!==3 (set /a bad_total+=1 & call :comment_bad & call :say "he remains where the habit left him." 1 & call :narrator )
+if !real!==1 (set /a good_total+=1 & call :comment_good & call :say "he gets up before the loop fully closes." 1 & call :narrator !real!)
+if !real!==2 (set /a bad_total+=1 & call :comment_bad & call :say "he stays half-awake and fully delayed." 1 & call :narrator !real!)
+if !real!==3 (set /a bad_total+=1 & call :comment_bad & call :say "he remains where the habit left him." 1 & call :narrator !real! )
 
 goto school
 
@@ -242,17 +246,19 @@ call set "real=%%map!pick!%%"
 
 call :repeat_check school !real!
 
-if !real!==1 (set /a good_total+=1 & call :comment_good & call :say "he clears it now and removes the weight from later." 1 & call :narrator )
-if !real!==2 (set /a bad_total+=1 & call :comment_bad & call :say "he saves it for later, and later becomes heavier." 1 & call :narrator )
-if !real!==3 (set /a bad_total+=1 & call :comment_bad & call :say "he drops it from sight, not from consequence." 1 & call :narrator )
+if !real!==1 (set /a good_total+=1 & call :comment_good & call :say "he clears it now and removes the weight from later." 1 & call :narrator !real!)
+if !real!==2 (set /a bad_total+=1 & call :comment_bad & call :say "he saves it for later, and later becomes heavier." 1 & call :narrator !real! )
+if !real!==3 (set /a bad_total+=1 & call :comment_bad & call :say "he drops it from sight, not from consequence." 1 & call :narrator !real! )
 
 goto night
 
 rem ================= NIGHT =================
 :night
 call :say "night returns with the same face." 1
-call :say "He says - tomorrow is my day." 1
+call :say "He says - tomorrow will be my day." 1
+timeout /t 1 >nul
 call :say "the sentence is familiar." 1
+timeout /t 1 >nul
 call :say "familiar is not the same as true." 1
 timeout /t 5 >nul
 goto day_start
@@ -291,7 +297,10 @@ exit /b
 
 rem ================= NARRATOR =================
 :narrator
+set "latest=%~1"
 set /a mood=%good_total%-%bad_total%
+
+if "!latest!"=="1" if %mood% LEQ -2 goto narrator_recovery
 
 if %mood% GEQ 2 goto narrator_hopeful
 if %mood% LEQ -2 goto narrator_heavy
@@ -311,11 +320,22 @@ exit /b
 :narrator_heavy
 set /a nr=%random%%%5
 
-if %nr%==0 call :popup "[ it becomes easier to repeat than resist. ]" 1
-if %nr%==1 call :popup "[ the excuse arrives faster this time. ]" 1
-if %nr%==2 call :popup "[ he already knows where this choice leads. ]" 1
-if %nr%==3 call :popup "[ delay is starting to feel natural. ]" 1
-if %nr%==4 call :popup "[ habits survive when nobody interrupts them. ]" 1
+REM ===== DEEP BAD PATTERN -> POPUP =====
+if %bad_total% GEQ 3 (
+    if %nr%==0 call :popup "[ it becomes easier to repeat than resist. ]"
+    if %nr%==1 call :popup "[ the excuse arrives faster this time. ]"
+    if %nr%==2 call :popup "[ he already knows where this choice leads. ]"
+    if %nr%==3 call :popup "[ delay is starting to feel natural. ]"
+    if %nr%==4 call :popup "[ habits survive when nobody interrupts them. ]"
+    exit /b
+)
+
+REM ===== EARLIER BAD STATE -> NORMAL TEXT =====
+if %nr%==0 call :say "[ it becomes easier to repeat than resist. ]" 1
+if %nr%==1 call :say "[ the excuse arrives faster this time. ]" 1
+if %nr%==2 call :say "[ he already knows where this choice leads. ]" 1
+if %nr%==3 call :say "[ delay is starting to feel natural. ]" 1
+if %nr%==4 call :say "[ habits survive when nobody interrupts them. ]" 1
 
 exit /b
 
@@ -327,6 +347,15 @@ if %nr%==1 call :say "[ discipline rarely looks dramatic. ]" 1
 if %nr%==2 call :say "[ small corrections still matter. ]" 1
 if %nr%==3 call :say "[ the routine bends a little. ]" 1
 if %nr%==4 call :say "[ better choices are becoming less unfamiliar. ]" 1
+
+:narrator_recovery
+set /a nr=%random%%%5
+
+if %nr%==0 call :say "[ the pattern weakens for a moment. ]" 1
+if %nr%==1 call :say "[ not every habit survives resistance. ]" 1
+if %nr%==2 call :say "[ this choice did not follow the others. ]" 1
+if %nr%==3 call :say "[ the routine hesitates slightly. ]" 1
+if %nr%==4 call :say "[ something pushed back this time. ]" 1
 
 exit /b
 
@@ -538,7 +567,7 @@ call :say "unnoticed.." 1
 timeout /t 2 >nul
 call :say "but real." 1
 timeout /t 3 >nul
-call :say "-God gave us a spirit not of fear but of power… and self-control.- (2 Timothy 1:7)" 1
+call :say "-God gave us a spirit not of fear but of power... and self-control.- (2 Timothy 1:7)" 1
 pause
 cls
 call :credits
@@ -575,27 +604,51 @@ timeout /t 2 >nul
 call :say "not victory." 1
 timeout /t 2 >nul
 call :say "but awareness." 1
+timeout /t 1 >nul
 call :say "and awareness does not let you go back unchanged." 1
 timeout /t 3 >nul
-call :say "-You are neither cold nor hot… because you are lukewarm, I will spit you out.-(Revelation 3:15–16)" 1
+call :say "-A double-minded man is unstable in all his ways.-(James 1:8)" 1
 pause
 cls
 call :credits
 exit
 rem ================= CREDITS =================
 :credits
+call :say "-Twenty years from now you will be more disappointed by the things that you didn't do than by the ones you did do." 1
+timeout /t 4 >nul
+call :say "So throw off the bowlines." 1
+timeout /t 1 >nul
+call :say " Catch the trade winds in your sails." 1
+timeout /t 1 >nul
+call :say "Sail away from the safe harbor." 1
+timeout /t 3 >nul
+call :say "Explore." 1
+timeout /t 1 >nul
+call :say "Dream." 1
+timeout /t 1 >nul
+call :say "Discover." 1
+timeout /t 3 >nul
+cls
+call :say "hey %name%, officially this story is over here... but.. your story continues." 1
+timeout /t 2 >nul
+call :say "Btw this story's ending differs from person to person." 1
+timeout /t 1 >nul
+cls
 call :say "this story is fictional. none of these events are real, and any similarity is purely coincidental." 1
-call :say "-Twenty years from now you will be more disappointed by the things that you didn't do than by the ones you did do. So throw off the bowlines. Sail away from the safe harbor. Catch the trade winds in your sails. Explore. Dream. Discover. - Unknown" 1
-call :say "hey %name%, officially this story is over here... but.. your story starts from here. Btw this story's ending differs from person to person." 1
+cls
 call :say "Credits" 1
+timeout /t 1 >nul
 call :say "First of All, im Thanking God." 1
-call :say "“Through Jesus, this creation was made possible.”" 1
+call :say "Through Jesus, this creation was made possible." 1
+timeout /t 1 >nul
 call :say "concept, design, narrative:" 1
 call :say "Cerafin C F" 1
 call :say "-" 1
+timeout /t 1 >nul
 call :say "ai collaboration and system support:" 1
 call :say "ChatGPT by OpenAI" 1
 call :say "-" 1
+timeout /t 1 >nul
 call :say "this script is not just code." 1
 call :say "it is a reflection loop." 1
 call :say "----------------------------------------" 1
