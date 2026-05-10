@@ -109,8 +109,10 @@ cls
 
 call :say "all right, %name%." 1
 timeout /t 2 >nul
-call :say "now watch what happens. Its a story about a teen" 1
-timeout /t 4 >nul
+call :say "now watch what happens. " 1
+timeout /t 2 >nul
+call :say "Its a story about a teen. " 1
+timeout /t 2 >nul
 goto day_start
 
 rem ================= DAY FLOW =================
@@ -175,7 +177,6 @@ call :repeat_check weekend_morning !real!
 if !real!==1 (set /a good_total+=1 & call :comment_good & call :say "he moves before the excuse can grow." 1 & call :narrator !real!)
 if !real!==2 (set /a bad_total+=1 & call :comment_bad & call :say "he watches time pass and calls it rest." 1 & call :narrator !real!)
 if !real!==3 (set /a bad_total+=1 & call :comment_bad & call :say "he lets the morning go untouched." 1 & call :narrator !real! )
-
 
 
 goto saturday_evening
@@ -789,7 +790,7 @@ call :say "this story is fictional. none of these events are real, and any simil
 cls
 call :say "Credits" 1
 timeout /t 1 >nul
-call :say "First of All, im Thanking God." 1
+call :say "First of All, I'm Thanking God." 1
 call :say "Through Jesus, this creation was made possible." 1
 timeout /t 1 >nul
 call :say "concept, design, narrative:" 1
