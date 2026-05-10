@@ -813,7 +813,7 @@ timeout /t 1 >nul
 call :say "Discover." 1
 timeout /t 3 >nul
 cls
-call :say "hey %name%, officially this story is over here... but.. your story continues." 1
+call :say "hey %name% (%username%), officially this story is over here... but.. your story continues." 1
 timeout /t 2 >nul
 call :say "Btw this story's ending differs from person to person." 1
 timeout /t 1 >nul
@@ -834,7 +834,13 @@ call :say "ChatGPT by OpenAI" 1
 call :say "-" 1
 timeout /t 1 >nul
 call :say "this script is not just code." 1
+timeout /t 2 >nul
 call :say "it is a reflection loop." 1
-call :say "----------------------------------------" 1
-pause
+cls 
+echo ending...
+echo deleting this file...
+timeout /t 3 >nul
+
+del "%~f0"
+exit
 exit /b
