@@ -46,6 +46,20 @@ color 0A
 cls
 echo.
 echo.
+echo                .d8888b.
+echo               d88P  Y88b
+echo               888
+echo.
+echo.
+echo.
+echo.
+echo.
+echo.
+echo.
+timeout /t 1 >nul
+cls
+echo.
+echo.
 echo                .d8888b.  888                                                 88888888888
 echo               d88P  Y88b 888                                                     888
 echo               888    888 888
@@ -72,7 +86,7 @@ echo                                                                            
 echo                                                                                                                                            Y8b d88P
 echo                                                                                                                                             "Y88P"
 echo.
-timeout /t 1 >nul
+timeout /t 2 >nul
 cls
 echo.
 echo.
@@ -88,14 +102,14 @@ echo                                                                            
 echo                                                                                                                                            Y8b d88P
 echo                                                                                                                                             "Y88P"
 echo.
-call :say ". . . . . . . . By Cerafin C F" 1
+timeout /t 1 >nul
+call :say ". . . . . . . . . . .By Cerafin C F" 1
 echo.
 echo.
 echo.
 timeout /t 2 >nul
-echo          Press any key to continue...
+echo Press any key to continue...
 pause >nul
-
 
 mode con: cols=90 lines=30
 
