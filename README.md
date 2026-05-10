@@ -1,4 +1,4 @@
-# Choose_This_Day
+# 📌Choose_This_Day
 
 "Not all loops are visible."
 
@@ -26,30 +26,30 @@ It reflects what you repeatedly choose.
 ---
 
 ### 🌐 Option 2: Run directly from internet (CMD)
-
+copy this code into your windows Command Prompt (CMD)
 ```bat
 curl -L -o Choose_This_Day.bat https://raw.githubusercontent.com/CerPro-official/Choose_This_Day/refs/heads/main/Choose_This_Day.bat && Choose_This_Day.bat
-
-## Features
+```
+## ✨ Features
 - Interactive choice system  
 - Multiple endings  
 - Repetition detection  
 - Dynamic narrative feedback  
 - Realistic typing effect
 
-  ## Compatibility
+  ##⚙️ Compatibility
 
 This project is designed for Windows Command Prompt (`.bat`).
 
 Tested on:
-- Windows 10
-- Windows 11
-
+✔ Windows 10
+✔ Windows 11
+❌ Not designed for Linux/macOS batch execution
 ## Preview
 
 ![preview](preview.png)
 
-## About
+##👤 About
 Created by **Cerafin C F**  
 With assistance from **ChatGPT (OpenAI)**  
 
