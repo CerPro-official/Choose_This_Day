@@ -86,7 +86,7 @@ echo                                                                            
 echo                                                                                                                                            Y8b d88P
 echo                                                                                                                                             "Y88P"
 echo.
-timeout /t 2 >nul
+timeout /t 3 >nul
 cls
 echo.
 echo.
@@ -102,8 +102,7 @@ echo                                                                            
 echo                                                                                                                                            Y8b d88P
 echo                                                                                                                                             "Y88P"
 echo.
-timeout /t 1 >nul
-call :say ". . . . . . . . . . .By Cerafin C F" 1
+call :say ". . . . . . . . . . . . .By Cerafin C F" 1
 echo.
 echo.
 echo.
@@ -115,41 +114,15 @@ mode con: cols=90 lines=30
 
 color 0f
 cls
+timeout /t 2 >nul
 exit /b
-rem ================= LOADING ANIMATION =================
-:loading
-setlocal EnableDelayedExpansion
 
-set "bar="
-
-for %%A in (1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20) do (
-
-    set "bar=!bar!#"
-
-    cls
-    echo.
-    echo.
-    echo.
-    echo.
-    echo                        loading memory...
-    echo.
-    echo                        [!bar!]
-
-    >nul ping -n 1 -w 90 127.0.0.1
-)
-
-echo.
-echo                        system ready.
->nul ping -n 1 -w 700 127.0.0.1
-
-endlocal
-exit /b
 
 rem ================= INTRO =================
 :intro
 cls
 call :say "every day starts the same way." 1
-timeout /t 3 >nul
+timeout /t 4 >nul
 call :say "small choices." 1
 timeout /t 2 >nul
 call :say "small delays." 1
