@@ -36,6 +36,8 @@ echo loading..
 timeout /t 1 >nul
 cls
 echo loading.
+timeout /t 1 >nul
+cls
 call :boot_intro
 
 goto intro
@@ -137,6 +139,7 @@ cls
 call :say "all right, %name%." 1
 timeout /t 2 >nul
 call :say "even if the system calls you %username%..." 1
+timeout /t 3 >nul
 cls
 call :say "now watch what happens. " 1
 timeout /t 2 >nul
