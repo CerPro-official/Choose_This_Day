@@ -23,9 +23,19 @@ set "last_weekend_evening="
 set "last_sunday_evening="
 
 cls
-echo loading...
-timeout /t 3 >nul
+echo loading.
+timeout /t 1 >nul
 cls
+echo loading..
+timeout /t 1 >nul
+cls
+echo loading...
+timeout /t 1 >nul
+cls
+echo loading..
+timeout /t 1 >nul
+cls
+echo loading.
 call :boot_intro
 
 goto intro
@@ -34,8 +44,20 @@ rem ================= CLEAN INTRO =================
 :boot_intro
 color 0A
 cls
-
 echo.
+echo.
+echo                .d8888b.  888                                                 88888888888
+echo               d88P  Y88b 888                                                     888
+echo               888    888 888
+echo               888        88888b.   .d88b.   .d88b.
+echo               888        888 "88b d88""88b d88""88b
+echo               888    888 888  888 888  888 888  888
+echo               Y88b  d88P 888  888 Y88..88P Y88..88P
+echo                "Y8888P"  888  888  "Y88P"
+echo.
+echo.
+timeout /t 2 >nul
+cls
 echo.
 echo.
 echo                .d8888b.  888                                                 88888888888 888      d8b                   8888888b.
@@ -50,9 +72,27 @@ echo                                                                            
 echo                                                                                                                                            Y8b d88P
 echo                                                                                                                                             "Y88P"
 echo.
-echo                                                                               By Cerafin C F
+timeout /t 1 >nul
+cls
 echo.
 echo.
+echo                .d8888b.  888                                                 88888888888 888      d8b                   8888888b.
+echo               d88P  Y88b 888                                                     888     888      Y8P                   888  "Y88b
+echo               888    888 888                                                     888     888                            888    888
+echo               888        88888b.   .d88b.   .d88b.  .d8888b   .d88b.             888     88888b.  888 .d8888b           888    888  8888b.  888  888
+echo               888        888 "88b d88""88b d88""88b 88K      d8P  Y8b            888     888 "88b 888 88K               888    888     "88b 888  888
+echo               888    888 888  888 888  888 888  888 "Y8888b. 88888888            888     888  888 888 "Y8888b.          888    888 .d888888 888  888
+echo               Y88b  d88P 888  888 Y88..88P Y88..88P      X88 Y8b.                888     888  888 888      X88          888  .d88P 888  888 Y88b 888
+echo                "Y8888P"  888  888  "Y88P"   "Y88P"   88888P'  "Y8888 88888888    888     888  888 888  88888P' 88888888 8888888P"  "Y888888  "Y88888
+echo                                                                                                                                                 888
+echo                                                                                                                                            Y8b d88P
+echo                                                                                                                                             "Y88P"
+echo.
+call :say ". . . . . . . . By Cerafin C F" 1
+echo.
+echo.
+echo.
+timeout /t 2 >nul
 echo          Press any key to continue...
 pause >nul
 
@@ -109,6 +149,8 @@ cls
 
 call :say "all right, %name%." 1
 timeout /t 2 >nul
+call :say "even if the system calls you %username%..." 1
+cls
 call :say "now watch what happens. " 1
 timeout /t 2 >nul
 call :say "Its a story about a teen. " 1
