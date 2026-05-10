@@ -1,7 +1,7 @@
 @echo off
 setlocal EnableExtensions EnableDelayedExpansion
 title Choose_This_Day
-mode con: cols=90 lines=30
+mode con: cols=170 lines=28
 rem =========================================
 rem Created by Cerafin C F
 rem Project: Choose_This_Day
@@ -20,14 +20,76 @@ set "last_morning="
 set "last_school="
 set "last_weekend_morning="
 set "last_weekend_evening="
+set "last_sunday_evening="
 
 cls
 echo loading...
 timeout /t 3 >nul
 cls
-
+call :boot_intro
 
 goto intro
+
+rem ================= CLEAN INTRO =================
+:boot_intro
+color 0A
+cls
+
+echo.
+echo.
+echo.
+echo                .d8888b.  888                                                 88888888888 888      d8b                   8888888b.
+echo               d88P  Y88b 888                                                     888     888      Y8P                   888  "Y88b
+echo               888    888 888                                                     888     888                            888    888
+echo               888        88888b.   .d88b.   .d88b.  .d8888b   .d88b.             888     88888b.  888 .d8888b           888    888  8888b.  888  888
+echo               888        888 "88b d88""88b d88""88b 88K      d8P  Y8b            888     888 "88b 888 88K               888    888     "88b 888  888
+echo               888    888 888  888 888  888 888  888 "Y8888b. 88888888            888     888  888 888 "Y8888b.          888    888 .d888888 888  888
+echo               Y88b  d88P 888  888 Y88..88P Y88..88P      X88 Y8b.                888     888  888 888      X88          888  .d88P 888  888 Y88b 888
+echo                "Y8888P"  888  888  "Y88P"   "Y88P"   88888P'  "Y8888 88888888    888     888  888 888  88888P' 88888888 8888888P"  "Y888888  "Y88888
+echo                                                                                                                                                 888
+echo                                                                                                                                            Y8b d88P
+echo                                                                                                                                             "Y88P"
+echo.
+echo                                                                               By Cerafin C F
+echo.
+echo.
+echo          Press any key to continue...
+pause >nul
+
+
+mode con: cols=90 lines=30
+
+color 0f
+cls
+exit /b
+rem ================= LOADING ANIMATION =================
+:loading
+setlocal EnableDelayedExpansion
+
+set "bar="
+
+for %%A in (1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20) do (
+
+    set "bar=!bar!#"
+
+    cls
+    echo.
+    echo.
+    echo.
+    echo.
+    echo                        loading memory...
+    echo.
+    echo                        [!bar!]
+
+    >nul ping -n 1 -w 90 127.0.0.1
+)
+
+echo.
+echo                        system ready.
+>nul ping -n 1 -w 700 127.0.0.1
+
+endlocal
+exit /b
 
 rem ================= INTRO =================
 :intro
@@ -42,7 +104,7 @@ call :say "most people never notice the pattern." 1
 timeout /t 2 >nul
 call :say "but this story does." 1
 timeout /t 3 >nul
-set /p name=Btw your name: 
+set /p name= your name: 
 cls
 
 call :say "all right, %name%." 1
@@ -123,7 +185,7 @@ call :say "-" 1
 call :say "-" 1
 call :say "Later that day" 1
 timeout /t 1 >nul
-call :say "[Evening | 5.00PM]" 1
+call :say "[Evening | 5.00 PM]" 1
 timeout /t 2 >nul
 call :say "evening comes." 1
 timeout /t 1 >nul
@@ -182,6 +244,56 @@ if !real!==1 (set /a good_total+=1 & call :comment_good & call :say "he reflects
 if !real!==2 (set /a bad_total+=1 & call :comment_bad & call :say "he distracts himself and calls it balance." 1 & call :narrator !real!)
 if !real!==3 (set /a bad_total+=1 & call :comment_bad & call :say "he looks away from the thing that matters." 1 & call :narrator !real!)
 
+goto sunday_evening
+
+:sunday_evening
+call :say "-" 1
+call :say "-" 1
+call :say "[Evening | 7.00 PM]" 1
+timeout /t 2 >nul
+
+call :say "the weekend is almost gone." 1
+timeout /t 2 >nul
+call :say "tomorrow is already waiting." 1
+timeout /t 2 >nul
+
+call :shuffle_sun_evening
+
+echo.
+echo what does he do?
+echo.
+echo    1. !opt1!
+echo    2. !opt2!
+echo    3. !opt3!
+echo.
+
+choice /c 123 /n /m "choice:"
+set "pick=!errorlevel!"
+call set "real=%%map!pick!%%"
+
+call :repeat_check sunday_evening !real!
+
+if !real!==1 (
+    set /a good_total+=1
+    call :comment_good
+    call :say "he prepares before the pressure arrives." 1
+    call :narrator !real!
+)
+
+if !real!==2 (
+    set /a bad_total+=1
+    call :comment_bad
+    call :say "he delays the thought until it grows heavier." 1
+    call :narrator !real!
+)
+
+if !real!==3 (
+    set /a bad_total+=1
+    call :comment_bad
+    call :say "he escapes into distraction one more time." 1
+    call :narrator !real!
+)
+
 goto sunday_night
 
 :sunday_night
@@ -194,12 +306,13 @@ goto evaluate
 rem ================= WEEKDAY FLOW =================
 :weekday_flow
 call :say "morning starts before he is ready for it." 1
+timeout /t 2 >nul
 call :say "the alarm ends." 1
 timeout /t 1 >nul
 call :say "the phone begins." 1
-timeout /t 2 >nul
+timeout /t 3 >nul
 call :say "one habit enters before the others can defend themselves." 1
-timeout /t 1 >nul
+timeout /t 2 >nul
 
 call :shuffle_morning
 echo.
@@ -229,7 +342,7 @@ timeout /t 3 >nul
 call :say "inside, a task is waiting." 1
 timeout /t 2 >nul
 call :say "unfinished things always wait more loudly." 1
-timeout /t 1 >nul
+timeout /t 2 >nul
 
 call :shuffle_school
 echo.
@@ -256,7 +369,7 @@ rem ================= NIGHT =================
 :night
 call :say "night returns with the same face." 1
 call :say "He says - tomorrow will be my day." 1
-timeout /t 1 >nul
+timeout /t 2 >nul
 call :say "the sentence is familiar." 1
 timeout /t 1 >nul
 call :say "familiar is not the same as true." 1
@@ -266,8 +379,8 @@ goto day_start
 rem ================= EVALUATION =================
 :evaluate
 
-if %bad_total% GEQ 4 goto loop_end
-if %good_total% GEQ 4 goto disciplined_end
+if %bad_total% GEQ 5 goto loop_end
+if %good_total% GEQ 5 goto disciplined_end
 
 goto mixed_end
 
@@ -286,11 +399,13 @@ exit /b
 
 rem ================= COMMENTS =================
 :comment_good
+timeout /t 1 >nul
 if %good_total%==2 call :say "/ that was not delayed. /" 1
 if %good_total% GEQ 4 call :say "/ this is becoming a direction. /" 1
 exit /b
 
 :comment_bad
+timeout /t 1 >nul
 if %bad_total%==2 call :say "/ it happens again. /" 1
 if %bad_total% GEQ 4 call :say "/ it is easier each time. /" 1
 exit /b
@@ -300,13 +415,14 @@ rem ================= NARRATOR =================
 set "latest=%~1"
 set /a mood=%good_total%-%bad_total%
 
-if "!latest!"=="1" if %mood% LEQ -2 goto narrator_recovery
+if "!latest!"=="1" if %bad_total% GEQ 2 goto narrator_recovery
 
 if %mood% GEQ 2 goto narrator_hopeful
 if %mood% LEQ -2 goto narrator_heavy
 goto narrator_calm
 
 :narrator_calm
+timeout /t 1 >nul
 set /a nr=%random%%%5
 
 if %nr%==0 call :say "[ the choice passes quietly. ]" 1
@@ -331,15 +447,16 @@ if %bad_total% GEQ 3 (
 )
 
 REM ===== EARLIER BAD STATE -> NORMAL TEXT =====
-if %nr%==0 call :say "[ it becomes easier to repeat than resist. ]" 1
-if %nr%==1 call :say "[ the excuse arrives faster this time. ]" 1
-if %nr%==2 call :say "[ he already knows where this choice leads. ]" 1
-if %nr%==3 call :say "[ delay is starting to feel natural. ]" 1
-if %nr%==4 call :say "[ habits survive when nobody interrupts them. ]" 1
+if %nr%==0 call :box "it becomes easier to repeat than resist."
+if %nr%==1 call :box "the excuse arrives faster this time."
+if %nr%==2 call :box "he already knows where this choice leads."
+if %nr%==3 call :box "delay is starting to feel natural."
+if %nr%==4 call :box "habits survive when nobody interrupts them."
 
 exit /b
 
 :narrator_hopeful
+timeout /t 1 >nul
 set /a nr=%random%%%5
 
 if %nr%==0 call :say "[ something is changing slowly. ]" 1
@@ -348,14 +465,15 @@ if %nr%==2 call :say "[ small corrections still matter. ]" 1
 if %nr%==3 call :say "[ the routine bends a little. ]" 1
 if %nr%==4 call :say "[ better choices are becoming less unfamiliar. ]" 1
 
+exit /b
 :narrator_recovery
 set /a nr=%random%%%5
 
-if %nr%==0 call :say "[ the pattern weakens for a moment. ]" 1
-if %nr%==1 call :say "[ not every habit survives resistance. ]" 1
-if %nr%==2 call :say "[ this choice did not follow the others. ]" 1
-if %nr%==3 call :say "[ the routine hesitates slightly. ]" 1
-if %nr%==4 call :say "[ something pushed back this time. ]" 1
+if %nr%==0 call :notify "the pattern weakens for a moment."
+if %nr%==1 call :notify "not every habit survives resistance."
+if %nr%==2 call :notify "this choice did not follow the others."
+if %nr%==3 call :notify "the routine hesitates slightly."
+if %nr%==4 call :notify "something pushed back this time."
 
 exit /b
 
@@ -364,9 +482,9 @@ rem ================= SHUFFLES =================
 set "map1=1"
 set "map2=2"
 set "map3=3"
-set "opt1=he gets out of bed and starts the day"
-set "opt2=he stays on his phone for a few more minutes"
-set "opt3=he keeps lying there, telling himself he will start soon"
+set "opt1=he gets up before the comfort pulls him back in"
+set "opt2=he checks his phone for a few more minutes before starting the day"
+set "opt3=he stays in bed and tells himself he still has time"
 call :swap
 call :swap
 exit /b
@@ -375,9 +493,9 @@ exit /b
 set "map1=1"
 set "map2=2"
 set "map3=3"
-set "opt1=he finishes the task now and gets it off his mind"
-set "opt2=he pushes it aside and says he will do it later"
-set "opt3=he pushes it away and hopes it won't matter much."
+set "opt1=he finishes the task now so it does not follow him home"
+set "opt2=he tells himself he will deal with it later"
+set "opt3=he avoids thinking about it and hopes it won't matter much."
 call :swap
 call :swap
 exit /b
@@ -386,9 +504,9 @@ exit /b
 set "map1=1"
 set "map2=2"
 set "map3=3"
-set "opt1=he uses the morning to do something he has been putting off"
-set "opt2=he scrolls through his phone and lets the morning slip by"
-set "opt3=he goes back to sleep and pushes his chores out of his mind"
+set "opt1=he uses the free morning to finally get something done"
+set "opt2=he scrolls through his phone and lets the time pass"
+set "opt3=he goes back to sleep and ignores what still needs to be done"
 call :swap
 call :swap
 exit /b
@@ -408,12 +526,26 @@ exit /b
 set "map1=1"
 set "map2=2"
 set "map3=3"
-set "opt1=he thinks things through and listens to his own thoughts"
-set "opt2=he distracts himself so he does not have to think too much"
-set "opt3=he avoids it completely and calls that peace"
+set "opt1=he sits quietly and thinks honestly about himself"
+set "opt2=he distracts himself so he does not have to think too deeply"
+set "opt3=he avoids the thoughts completely and calls it peace"
 call :swap
 call :swap
 exit /b
+
+:shuffle_sun_evening
+set "map1=1"
+set "map2=2"
+set "map3=3"
+
+set "opt1=he gets ready for the week before the night disappears"
+set "opt2=he tells himself he still has enough time left"
+set "opt3=he avoids thinking about tomorrow completely"
+
+call :swap
+call :swap
+exit /b
+
 :swap
 set /a r1=!random!%%3+1
 set /a r2=!random!%%3+1
@@ -430,6 +562,25 @@ for %%A in (!r1!) do for %%B in (!r2!) do (
 
 exit /b
 
+rem ================= notify=================
+:notify
+echo.
+echo ===============================
+echo   >>> %~1 <<<
+echo ===============================
+echo.
+echo ^G
+timeout /t 2 >nul
+exit /b
+rem ================= BOX NARRATOR =================
+:box
+timeout /t 1 >nul
+echo.
+echo +------------------------------------------------+
+echo ^| %~1 ^|
+echo +------------------------------------------------+
+echo.
+exit /b
 rem ================= POPUP NARRATOR =================
 :popup
 setlocal
@@ -563,7 +714,7 @@ call :say "and that was new." 1
 timeout /t 3 >nul
 call :say "this is how it begins." 1
 call :say "quiet." 1
-call :say "unnoticed.." 1
+call :say "unnoticed." 1
 timeout /t 2 >nul
 call :say "but real." 1
 timeout /t 3 >nul
