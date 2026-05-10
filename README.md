@@ -16,10 +16,19 @@ The system tracks your behavior and responds to patterns over time.
 The result is not random.  
 It reflects what you repeatedly choose.
 
-## How to run
-1. Download the `.bat` file  
-2. Double-click it  
-3. Follow the prompts  
+## 🎮 How to run
+
+### 💻 Option 1: Manual
+1. Download `Choose_This_Day.bat`
+2. Double-click to run
+3. Follow on-screen instructions
+
+---
+
+### 🌐 Option 2: Run directly from internet (CMD)
+
+```bat
+curl -L -o Choose_This_Day.bat https://raw.githubusercontent.com/CerPro-official/Choose_This_Day/refs/heads/main/Choose_This_Day.bat && Choose_This_Day.bat
 
 ## Features
 - Interactive choice system  
