@@ -143,7 +143,7 @@ timeout /t 3 >nul
 cls
 call :say "now watch what happens. " 1
 timeout /t 2 >nul
-call :say "Its a story about a teen. " 1
+call :say "It's a story about a teen. " 1
 timeout /t 2 >nul
 goto day_start
 
@@ -208,7 +208,7 @@ call :repeat_check weekend_morning !real!
 
 if !real!==1 (set /a good_total+=1 & call :comment_good & call :say "he moves before the excuse can grow." 1 & call :narrator !real!)
 if !real!==2 (set /a bad_total+=1 & call :comment_bad & call :say "he watches time pass and calls it rest." 1 & call :narrator !real!)
-if !real!==3 (set /a bad_total+=1 & call :comment_bad & call :say "he lets the morning go untouched." 1 & call :narrator !real! )
+if !real!==3 (set /a bad_total+=1 & call :comment_bad & call :say "he lets the morning go untouched." 1 & call :narrator !real!)
 
 
 goto saturday_evening
@@ -239,7 +239,7 @@ call set "real=%%map!pick!%%"
 
 call :repeat_check weekend_evening !real!
 
-if !real!==1 (set /a good_total+=1 & call :comment_good & call :say "he prepares while there is still time to prepare." 1 & call :narrator !real!)
+if !real!==1 (set /a good_total+=1 & call :comment_good & call :say "he prepares while there is still time to prepare." 1 &  call :narrator !real!)
 if !real!==2 (set /a bad_total+=1 & call :comment_bad & call :say "he delays again, as if delay is harmless." 1  & call :narrator !real!)
 if !real!==3 (set /a bad_total+=1 & call :comment_bad & call :say "he chooses silence over change." 1 & call :narrator !real!)
 
@@ -284,7 +284,6 @@ call :say "-" 1
 call :say "-" 1
 call :say "[Evening | 7.00 PM]" 1
 timeout /t 2 >nul
-
 call :say "the weekend is almost gone." 1
 timeout /t 2 >nul
 call :say "tomorrow is already waiting." 1
@@ -306,26 +305,11 @@ call set "real=%%map!pick!%%"
 
 call :repeat_check sunday_evening !real!
 
-if !real!==1 (
-    set /a good_total+=1
-    call :comment_good
-    call :say "he prepares before the pressure arrives." 1
-    call :narrator !real!
-)
+if !real!==1 (set /a good_total+=1 & call :comment_good & call :say "he prepares before the pressure arrives." 1 & call :narrator !real!)
 
-if !real!==2 (
-    set /a bad_total+=1
-    call :comment_bad
-    call :say "he delays the thought until it grows heavier." 1
-    call :narrator !real!
-)
+if !real!==2 (set /a bad_total+=1 & call :comment_bad & call :say "he delays the thought until it grows heavier." 1 & call :narrator !real!)
 
-if !real!==3 (
-    set /a bad_total+=1
-    call :comment_bad
-    call :say "he escapes into distraction one more time." 1
-    call :narrator !real!
-)
+if !real!==3 (set /a bad_total+=1 & call :comment_bad & call :say "he escapes into distraction one more time." 1 & call :narrator !real!)
 
 goto sunday_night
 
@@ -366,7 +350,7 @@ call :repeat_check morning !real!
 if !real!==1 (set /a good_total+=1 & call :comment_good & call :say "he gets up before the loop fully closes." 1 & call :narrator !real!)
 if !real!==2 (set /a bad_total+=1 & call :comment_bad & call :say "he stays half-awake and fully delayed." 1 & call :narrator !real!)
 if !real!==3 (set /a bad_total+=1 & call :comment_bad & call :say "he remains where the habit left him." 1 & call :narrator !real! )
-
+timeout /t 2 >nul
 goto school
 
 :school
@@ -470,14 +454,12 @@ exit /b
 set /a nr=%random%%%5
 
 REM ===== DEEP BAD PATTERN -> POPUP =====
-if %bad_total% GEQ 3 (
-    if %nr%==0 call :popup "[ it becomes easier to repeat than resist. ]"
-    if %nr%==1 call :popup "[ the excuse arrives faster this time. ]"
-    if %nr%==2 call :popup "[ he already knows where this choice leads. ]"
-    if %nr%==3 call :popup "[ delay is starting to feel natural. ]"
-    if %nr%==4 call :popup "[ habits survive when nobody interrupts them. ]"
-    exit /b
-)
+if %bad_total% GEQ 3 (if %nr%==0 call :popup "[ it becomes easier to repeat than resist. ]"
+if %nr%==1 call :popup "[ the excuse arrives faster this time. ]"
+if %nr%==2 call :popup "[ he already knows where this choice leads. ]"
+if %nr%==3 call :popup "[ delay is starting to feel natural. ]"
+if %nr%==4 call :popup "[ habits survive when nobody interrupts them. ]"
+exit /b)
 
 REM ===== EARLIER BAD STATE -> NORMAL TEXT =====
 if %nr%==0 call :box "it becomes easier to repeat than resist."
@@ -574,7 +556,6 @@ set "map3=3"
 set "opt1=he gets ready for the week before the night disappears"
 set "opt2=he tells himself he still has enough time left"
 set "opt3=he avoids thinking about tomorrow completely"
-
 call :swap
 call :swap
 exit /b
@@ -583,27 +564,30 @@ exit /b
 set /a r1=!random!%%3+1
 set /a r2=!random!%%3+1
 
-for %%A in (!r1!) do for %%B in (!r2!) do (
-    call set "t=%%map%%A%%"
-    call set "map%%A=%%map%%B%%"
-    set "map%%B=!t!"
-
-    call set "t=%%opt%%A%%"
-    call set "opt%%A=%%opt%%B%%"
-    set "opt%%B=!t!"
-)
+for %%A in (!r1!) do for %%B in (!r2!) do ( call set "t=%%map%%A%%" call set "map%%A=%%map%%B%%" set "map%%B=!t!" call set "t=%%opt%%A%%" call set "opt%%A=%%opt%%B%%" set "opt%%B=!t!")
 
 exit /b
 
-rem ================= notify=================
+rem ================= MODERN NOTIFY =================
+rem ================= MODERN NOTIFY (FIXED) =================
 :notify
-echo.
-echo ===============================
-echo   >>> %~1 <<<
-echo ===============================
-echo.
-echo ^G
-timeout /t 2 >nul
+setlocal
+set "msg=%~1"
+
+rem We use 'start /b' to run this in the background. 
+rem This way the game doesn't pause while waiting for the notification to time out.
+start /b powershell -NoProfile -ExecutionPolicy Bypass -Command ^
+    "[void][System.Reflection.Assembly]::LoadWithPartialName('System.Windows.Forms');" ^
+    "$n = New-Object System.Windows.Forms.NotifyIcon;" ^
+    "$n.Icon = [System.Drawing.SystemIcons]::Information;" ^
+    "$n.Visible = $true;" ^
+    "$n.BalloonTipTitle = 'Choose_This_Day';" ^
+    "$n.BalloonTipText = '%msg%';" ^
+    "$n.ShowBalloonTip(5000);" ^
+    "Start-Sleep -s 10;" ^
+    "$n.Dispose();"
+
+endlocal
 exit /b
 rem ================= BOX NARRATOR =================
 :box
@@ -830,7 +814,7 @@ call :say "Cerafin C F" 1
 call :say "-" 1
 timeout /t 1 >nul
 call :say "ai collaboration and system support:" 1
-call :say "ChatGPT by OpenAI" 1
+call :say "ChatGPT (OpenAI) & Gemini (Google)" 1
 call :say "-" 1
 timeout /t 1 >nul
 call :say "this script is not just code." 1
@@ -842,5 +826,4 @@ echo deleting this file...
 timeout /t 3 >nul
 
 del "%~f0"
-exit
 exit /b
