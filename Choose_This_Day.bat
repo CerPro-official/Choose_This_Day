@@ -23,12 +23,14 @@ set "last_weekend_evening="
 set "last_sunday_evening="
 
 cls
+call :play "Windows Proximity Connection.wav" 2
 echo loading.
 timeout /t 1 >nul
 cls
 echo loading..
 timeout /t 1 >nul
 cls
+
 echo loading...
 timeout /t 1 >nul
 cls
@@ -40,7 +42,6 @@ timeout /t 1 >nul
 cls
 call :boot_check
 
-timeout /t 2 >nul
  
 call :boot_intro  
 goto intro
@@ -76,8 +77,11 @@ echo               Y88b  d88P 888  888 Y88..88P Y88..88P
 echo                "Y8888P"  888  888  "Y88P"
 echo.
 echo.
-timeout /t 2 >nul
+
+timeout /t 3 >nul
+call :play "Ring05.wav" 2
 cls
+
 echo.
 echo.
 echo                .d8888b.  888                                                 88888888888 888      d8b                   8888888b.
@@ -94,7 +98,7 @@ echo                                                                            
 echo.
 timeout /t 3 >nul
 cls
-call :notify "Made by Cerafin C F "
+
 echo.
 echo.
 echo                .d8888b.  888                                                 88888888888 888      d8b                   8888888b.
@@ -115,6 +119,8 @@ echo.
 timeout /t 2 >nul
 echo Press any key to continue...
 pause >nul
+taskkill /f /im wscript.exe >nul 2>&1
+call :notify "Made by Cerafin C F "
 
 mode con: cols=90 lines=30
 
@@ -161,6 +167,7 @@ if exist "%appdata%\ctd_memory.txt" (
 exit /b
 
 :intro
+
 call :say "every day starts the same way." 1
 timeout /t 4 >nul
 call :say "small choices." 1
@@ -213,6 +220,7 @@ rem ================= FRIDAY =================
 :friday
 set "current_phase=friday"
 call :save
+call :play "Alarm01.wav" 
 call :say "friday arrives like a door that is already half open." 1
 timeout /t 3 >nul
 call :say "the week is tired." 1
@@ -747,6 +755,7 @@ rem ================= ENDINGS =================
 
 :loop_end
 cls
+call :play "Proximity Connection.wav" 10
 call :say "nothing broke the pattern." 1
 timeout /t 3 >nul
 call :say "not once." 1
@@ -830,6 +839,8 @@ exit
 
 :mixed_end
 cls
+
+call :play "Alarm07.wav" 10
 call :say "it is not fixed." 1
 call :say "that much is clear." 1
 timeout /t 3 >nul
@@ -865,14 +876,33 @@ timeout /t 4 >nul
 call :say "-A double-minded man is unstable in all his ways.-(James 1:8)" 1
 timeout /t 3 >nul
 pause
+taskkill /f /im wscript.exe >nul 2>&1
 cls
 call :credits
 exit
 
+rem -------------------play========
 :play
-if exist "%SystemRoot%\Media\%~1" (
-    start /b powershell -c "(New-Object System.Media.SoundPlayer '%SystemRoot%\Media\%~1').PlaySync();"
+set "soundfile=%SystemRoot%\Media\%~1"
+set "loops=%~2"
+
+:: Default to 1 loop if no second argument is provided
+if "%loops%"=="" set "loops=1"
+if not exist "%soundfile%" exit /b
+
+:: Create the VBScript
+echo Set Player = CreateObject("WMPlayer.OCX") > "%temp%\play.vbs"
+echo Player.URL = "%soundfile%" >> "%temp%\play.vbs"
+
+:: Wrap the play and wait logic in a Batch loop
+for /L %%i in (1,1,%loops%) do (
+    echo Player.Controls.Play >> "%temp%\play.vbs"
+    echo While Player.PlayState ^<^> 1 >> "%temp%\play.vbs"
+    echo   WScript.Sleep 100 >> "%temp%\play.vbs"
+    echo Wend >> "%temp%\play.vbs"
 )
+
+start /b wscript.exe "%temp%\play.vbs"
 exit /b
 rem ================= CREDITS =================
 :credits
@@ -906,12 +936,14 @@ timeout /t 4 >nul
 cls
 call :say "Credits" 1
 timeout /t 1 >nul
+call :play "Ring05.wav" 10
 call :say "First of All, I'm Thanking God." 1
 timeout /t 2 >nul
 call :say "Through Jesus, this creation was made possible." 1
 timeout /t 2 >nul
 call :say "concept, design, narrative:" 1
 timeout /t 2 >nul
+
 call :say "Cerafin C F" 1
 call :say "-" 1
 timeout /t 3 >nul
@@ -919,12 +951,14 @@ call :say "ai collaboration and system support:" 1
 timeout /t 2 >nul
 call :say "ChatGPT (OpenAI) & Gemini (Google)" 1
 call :say "-" 1
+
 timeout /t 2 >nul
 call :say "this script is not just code." 1
 timeout /t 2 >nul
 call :say "it is a reflection loop." 1
 timeout /t 4 >nul
 cls 
+taskkill /f /im wscript.exe >nul 2>&1
 echo ending...
 echo deleting this file...
 timeout /t 3 >nul
