@@ -38,9 +38,13 @@ cls
 echo loading.
 timeout /t 1 >nul
 cls
-call :boot_intro
+call :boot_check
 
+timeout /t 2 >nul
+ 
+call :boot_intro  
 goto intro
+
 
 rem ================= CLEAN INTRO =================
 :boot_intro
@@ -90,6 +94,7 @@ echo                                                                            
 echo.
 timeout /t 3 >nul
 cls
+call :notify "Made by Cerafin C F "
 echo.
 echo.
 echo                .d8888b.  888                                                 88888888888 888      d8b                   8888888b.
@@ -104,7 +109,6 @@ echo                                                                            
 echo                                                                                                                                            Y8b d88P
 echo                                                                                                                                             "Y88P"
 echo.
-call :say ". . . . . . . . . . . . .By Cerafin C F" 1
 echo.
 echo.
 echo.
@@ -121,8 +125,42 @@ exit /b
 
 
 rem ================= INTRO =================
+
+rem ================= STARTUP LOGIC =================
+:boot_check
+if exist "%appdata%\ctd_memory.txt" (
+    cls
+    echo.
+    echo  [!] A previous path was found in the pattern.
+    echo.
+    echo    1. Continue
+    echo    2. Reset
+    echo.
+    choice /c 12 /n /m " choice: "
+    if errorlevel 2 (
+        del "%appdata%\ctd_memory.txt"
+        set "day_count=0"
+        set "good_total=0"
+        set "bad_total=0"
+        exit /b
+    )
+    
+    < "%appdata%\ctd_memory.txt" (
+        set /p "name="
+        set /p "day_count="
+        set /p "good_total="
+        set /p "bad_total="
+        set /p "current_phase="
+    )
+    cls
+    call :play "Speech On.wav"
+    call :say "Welcome back, !name!. The pattern continues." 1
+    timeout /t 2 >nul
+    goto !current_phase!
+)
+exit /b
+
 :intro
-cls
 call :say "every day starts the same way." 1
 timeout /t 4 >nul
 call :say "small choices." 1
@@ -134,7 +172,20 @@ timeout /t 2 >nul
 call :say "but this story does." 1
 timeout /t 3 >nul
 set /p name= your name: 
-cls
+set "current_phase=intro"
+call :save
+goto day_start
+
+rem ================= SAVE LABEL =================
+:save
+(
+    echo %name%
+    echo %day_count%
+    echo %good_total%
+    echo %bad_total%
+    echo %current_phase%
+) > "%appdata%\ctd_memory.txt"
+exit /b
 
 call :say "all right, %name%." 1
 timeout /t 2 >nul
@@ -160,7 +211,8 @@ goto evaluate
 
 rem ================= FRIDAY =================
 :friday
-
+set "current_phase=friday"
+call :save
 call :say "friday arrives like a door that is already half open." 1
 timeout /t 3 >nul
 call :say "the week is tired." 1
@@ -180,6 +232,10 @@ goto weekday_flow
 
 rem ================= SATURDAY =================
 :saturday
+
+set "current_phase=saturday"
+call :save
+
 call :say "saturday comes without a bell." 1
 timeout /t 2 >nul
 call :say "there is no school to hide behind." 1
@@ -214,6 +270,8 @@ if !real!==3 (set /a bad_total+=1 & call :comment_bad & call :say "he lets the m
 goto saturday_evening
 
 :saturday_evening
+set "current_phase=saturday_evening"
+call :save
 call :say "-" 1
 call :say "-" 1
 call :say "Later that day" 1
@@ -243,10 +301,22 @@ if !real!==1 (set /a good_total+=1 & call :comment_good & call :say "he prepares
 if !real!==2 (set /a bad_total+=1 & call :comment_bad & call :say "he delays again, as if delay is harmless." 1  & call :narrator !real!)
 if !real!==3 (set /a bad_total+=1 & call :comment_bad & call :say "he chooses silence over change." 1 & call :narrator !real!)
 
-goto night
+goto saturday_night
+:saturday_night
+set "current_phase=saturday_night"
+call :save
+call :say "saturday night is heavier than the last." 1
+timeout /t 2 >nul
+
+call :say "the weekend is slipping away." 1
+timeout /t 3 >nul
+
+goto day_start
 
 rem ================= SUNDAY =================
 :sunday
+set "current_phase=sunday"
+call :save
 call :say "sunday is quieter than the rest." 1
 timeout /t 2 >nul
 call :say "but quiet does not mean peace." 1
@@ -280,6 +350,8 @@ if !real!==3 (set /a bad_total+=1 & call :comment_bad & call :say "he looks away
 goto sunday_evening
 
 :sunday_evening
+set "current_phase=sunday_evening"
+call :save
 call :say "-" 1
 call :say "-" 1
 call :say "[Evening | 7.00 PM]" 1
@@ -314,6 +386,8 @@ if !real!==3 (set /a bad_total+=1 & call :comment_bad & call :say "he escapes in
 goto sunday_night
 
 :sunday_night
+set "current_phase=sunday_night"
+call :save
 call :say "night arrives." 1
 call :say "the week stands there in pieces." 1
 timeout /t 2 >nul
@@ -322,6 +396,8 @@ goto evaluate
 
 rem ================= WEEKDAY FLOW =================
 :weekday_flow
+set "current_phase=weekday_flow"
+call :save
 call :say "morning starts before he is ready for it." 1
 timeout /t 2 >nul
 call :say "the alarm ends." 1
@@ -354,6 +430,8 @@ timeout /t 2 >nul
 goto school
 
 :school
+set "current_phase=school"
+call :save
 call :say "school feels the same from the outside." 1
 timeout /t 3 >nul
 call :say "inside, a task is waiting." 1
@@ -380,10 +458,12 @@ if !real!==1 (set /a good_total+=1 & call :comment_good & call :say "he clears i
 if !real!==2 (set /a bad_total+=1 & call :comment_bad & call :say "he saves it for later, and later becomes heavier." 1 & call :narrator !real! )
 if !real!==3 (set /a bad_total+=1 & call :comment_bad & call :say "he drops it from sight, not from consequence." 1 & call :narrator !real! )
 
-goto night
+goto friday_night
 
-rem ================= NIGHT =================
-:night
+rem ================= FRIDAY NIGHT =================
+:friday_night
+set "current_phase=friday_night"
+call :save
 call :say "night returns with the same face." 1
 call :say "He says - tomorrow will be my day." 1
 timeout /t 2 >nul
@@ -454,7 +534,7 @@ exit /b
 set /a nr=%random%%%5
 
 REM ===== DEEP BAD PATTERN -> POPUP =====
-if %bad_total% GEQ 3 (if %nr%==0 call :popup "[ it becomes easier to repeat than resist. ]"
+if %bad_total% GEQ 4 (if %nr%==0 call :popup "[ it becomes easier to repeat than resist. ]"
 if %nr%==1 call :popup "[ the excuse arrives faster this time. ]"
 if %nr%==2 call :popup "[ he already knows where this choice leads. ]"
 if %nr%==3 call :popup "[ delay is starting to feel natural. ]"
@@ -567,8 +647,6 @@ set /a r2=!random!%%3+1
 for %%A in (!r1!) do for %%B in (!r2!) do ( call set "t=%%map%%A%%" call set "map%%A=%%map%%B%%" set "map%%B=!t!" call set "t=%%opt%%A%%" call set "opt%%A=%%opt%%B%%" set "opt%%B=!t!")
 
 exit /b
-
-rem ================= MODERN NOTIFY =================
 rem ================= MODERN NOTIFY (FIXED) =================
 :notify
 setlocal
@@ -678,29 +756,36 @@ timeout /t 3 >nul
 call :say "the same choices returned, again and again," 1
 timeout /t 1 >nul
 call :say "until they stopped feeling like choices at all." 1
+timeout /t 3 >nul
 call :say "they became default." 1
+timeout /t 1 >nul
 call :say "automatic." 1
-call :say "quiet.and..." 1
+timeout /t 1 >nul
+call :say "quiet. and..." 1
 timeout /t 2 >nul
 call :say "dangerous." 1
 timeout /t 3 >nul
 call :say "time moved forward." 1
+timeout /t 1 >nul
 call :say "but nothing inside him moved with it." 1
 timeout /t 3 >nul
 call :say "days passed." 1
-timeout /t 1 >nul
+timeout /t 2 >nul
 call :say "then weeks." 1
 timeout /t 1 >nul
 call :say "and the pattern remained untouched." 1
 timeout /t 3 >nul
 call :say "he once said: tomorrow i will fix it." 1
+timeout /t 3 >nul
 call :say "now even that sentence is gone." 1
 timeout /t 3 >nul
 call :say "this is how it happens." 1
 call :say "not with failure." 1
+timeout /t 2 >nul
 call :say "but with repetition." 1
 timeout /t 3 >nul
 call :say "-The soul of the sluggard craves and gets nothing, while the soul of the diligent is richly supplied.- (Proverbs 13:4)" 1
+timeout /t 3 >nul
 pause
 cls
 call :credits
@@ -736,6 +821,7 @@ timeout /t 2 >nul
 call :say "but real." 1
 timeout /t 3 >nul
 call :say "-God gave us a spirit not of fear but of power... and self-control.- (2 Timothy 1:7)" 1
+timeout /t 3 >nul
 pause
 cls
 call :credits
@@ -750,8 +836,8 @@ timeout /t 3 >nul
 call :say "some choices resisted." 1
 timeout /t 2 >nul
 call :say "some choices repeated." 1
-call :say "the pattern cracked," 1
 timeout /t 2 >nul
+call :say "the pattern cracked," 1
 call :say "but did not break." 1
 timeout /t 3 >nul
 call :say "he noticed it now." 1
@@ -767,63 +853,82 @@ timeout /t 1 >nul
 call :say "every repeat feels chosen." 1
 timeout /t 3 >nul
 call :say "this is the middle." 1
-call :say "not failure." 1
-timeout /t 2 >nul
-call :say "not victory." 1
-timeout /t 2 >nul
-call :say "but awareness." 1
-timeout /t 1 >nul
-call :say "and awareness does not let you go back unchanged." 1
 timeout /t 3 >nul
+call :say "not failure." 1
+timeout /t 1 >nul
+call :say "not victory." 1
+timeout /t 1 >nul
+call :say "but awareness." 1
+timeout /t 3 >nul
+call :say "and awareness does not let you go back unchanged." 1
+timeout /t 4 >nul
 call :say "-A double-minded man is unstable in all his ways.-(James 1:8)" 1
+timeout /t 3 >nul
 pause
 cls
 call :credits
 exit
+
+:play
+start /b powershell -c "(New-Object System.Media.SoundPlayer 'C:\Windows\Media\%~1').PlaySync();"
+exit /b
 rem ================= CREDITS =================
 :credits
-call :say "-Twenty years from now you will be more disappointed by the things that you didn't do than by the ones you did do." 1
+if exist "%appdata%\ctd_memory.txt" del "%appdata%\ctd_memory.txt"
+call :say "-Twenty years from now... " 1
+timeout /t 2 >nul
+call :say "you will be more disappointed by the things that you didn't do.." 1
+timeout /t 3 >nul
+call :say "than by the ones you did do." 1
 timeout /t 4 >nul
 call :say "So throw off the bowlines." 1
-timeout /t 1 >nul
+timeout /t 2 >nul
 call :say " Catch the trade winds in your sails." 1
-timeout /t 1 >nul
-call :say "Sail away from the safe harbor." 1
 timeout /t 3 >nul
+call :say "Sail away from the safe harbor." 1
+timeout /t 2 >nul
 call :say "Explore." 1
-timeout /t 1 >nul
+timeout /t 2 >nul
 call :say "Dream." 1
-timeout /t 1 >nul
+timeout /t 2 >nul
 call :say "Discover." 1
 timeout /t 3 >nul
 cls
-call :say "hey %name% (%username%), officially this story is over here... but.. your story continues." 1
+call :say "hey %name%, officially this story is over here... but.. your story continues." 1
 timeout /t 2 >nul
 call :say "Btw this story's ending differs from person to person." 1
-timeout /t 1 >nul
+timeout /t 2 >nul
 cls
 call :say "this story is fictional. none of these events are real, and any similarity is purely coincidental." 1
+timeout /t 4 >nul
 cls
 call :say "Credits" 1
 timeout /t 1 >nul
 call :say "First of All, I'm Thanking God." 1
+timeout /t 2 >nul
 call :say "Through Jesus, this creation was made possible." 1
-timeout /t 1 >nul
+timeout /t 2 >nul
 call :say "concept, design, narrative:" 1
+timeout /t 2 >nul
 call :say "Cerafin C F" 1
 call :say "-" 1
-timeout /t 1 >nul
+timeout /t 3 >nul
 call :say "ai collaboration and system support:" 1
+timeout /t 2 >nul
 call :say "ChatGPT (OpenAI) & Gemini (Google)" 1
 call :say "-" 1
-timeout /t 1 >nul
+timeout /t 2 >nul
 call :say "this script is not just code." 1
 timeout /t 2 >nul
 call :say "it is a reflection loop." 1
+timeout /t 4 >nul
 cls 
 echo ending...
 echo deleting this file...
 timeout /t 3 >nul
+echo THE END
+timeout /t 1 >nul
 
+rem CLEAN UP MEMORY AND SELF
 del "%~f0"
 exit /b
