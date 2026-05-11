@@ -870,7 +870,9 @@ call :credits
 exit
 
 :play
-start /b powershell -c "(New-Object System.Media.SoundPlayer 'C:\Windows\Media\%~1').PlaySync();"
+if exist "%SystemRoot%\Media\%~1" (
+    start /b powershell -c "(New-Object System.Media.SoundPlayer '%SystemRoot%\Media\%~1').PlaySync();"
+)
 exit /b
 rem ================= CREDITS =================
 :credits
