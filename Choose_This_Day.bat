@@ -40,6 +40,7 @@ cls
 echo loading.
 timeout /t 1 >nul
 cls
+taskkill /f /im wscript.exe >nul 2>&1
 call :boot_check
 
  
@@ -51,6 +52,7 @@ rem ================= CLEAN INTRO =================
 :boot_intro
 color 0A
 cls
+call :play "ir_inter.wav" 1
 echo.
 echo.
 echo                .d8888b.
@@ -144,12 +146,12 @@ if exist "%appdata%\ctd_memory.txt" (
     echo.
     choice /c 12 /n /m " choice: "
     if errorlevel 2 (
-        del "%appdata%\ctd_memory.txt"
-        set "day_count=0"
-        set "good_total=0"
-        set "bad_total=0"
-        exit /b
-    )
+    del "%appdata%\ctd_memory.txt" >nul 2>&1
+    set "day_count=0"
+    set "good_total=0"
+    set "bad_total=0"
+    goto :intro  
+)
     
     < "%appdata%\ctd_memory.txt" (
         set /p "name="
@@ -159,7 +161,7 @@ if exist "%appdata%\ctd_memory.txt" (
         set /p "current_phase="
     )
     cls
-    call :play "Speech On.wav"
+    call :play "Speech On.wav" 1
     call :say "Welcome back, !name!. The pattern continues." 1
     timeout /t 2 >nul
     goto !current_phase!
@@ -755,7 +757,7 @@ rem ================= ENDINGS =================
 
 :loop_end
 cls
-call :play "Proximity Connection.wav" 10
+call :play "Ring09.wav" 15
 call :say "nothing broke the pattern." 1
 timeout /t 3 >nul
 call :say "not once." 1
@@ -796,6 +798,7 @@ timeout /t 3 >nul
 call :say "-The soul of the sluggard craves and gets nothing, while the soul of the diligent is richly supplied.- (Proverbs 13:4)" 1
 timeout /t 3 >nul
 pause
+
 cls
 call :credits
 exit
@@ -803,6 +806,7 @@ exit
 
 :disciplined_end
 cls
+call :play "Ring04.wav" 15
 call :say "something changed." 1
 timeout /t 3 >nul
 call :say "it was small enough to ignore." 1
@@ -830,7 +834,9 @@ timeout /t 2 >nul
 call :say "but real." 1
 timeout /t 3 >nul
 call :say "-God gave us a spirit not of fear but of power... and self-control.- (2 Timothy 1:7)" 1
+
 timeout /t 3 >nul
+taskkill /f /im wscript.exe >nul 2>&1
 pause
 cls
 call :credits
@@ -875,8 +881,9 @@ call :say "and awareness does not let you go back unchanged." 1
 timeout /t 4 >nul
 call :say "-A double-minded man is unstable in all his ways.-(James 1:8)" 1
 timeout /t 3 >nul
-pause
 taskkill /f /im wscript.exe >nul 2>&1
+pause
+
 cls
 call :credits
 exit
@@ -907,6 +914,7 @@ exit /b
 rem ================= CREDITS =================
 :credits
 if exist "%appdata%\ctd_memory.txt" del "%appdata%\ctd_memory.txt"
+call :play "Alarm09.wav" 15
 call :say "-Twenty years from now... " 1
 timeout /t 2 >nul
 call :say "you will be more disappointed by the things that you didn't do.." 1
@@ -925,6 +933,7 @@ call :say "Dream." 1
 timeout /t 2 >nul
 call :say "Discover." 1
 timeout /t 3 >nul
+taskkill /f /im wscript.exe >nul 2>&1
 cls
 call :say "hey %name%, officially this story is over here... but.. your story continues." 1
 timeout /t 2 >nul
@@ -936,7 +945,7 @@ timeout /t 4 >nul
 cls
 call :say "Credits" 1
 timeout /t 1 >nul
-call :play "Ring05.wav" 10
+call :play "Ring08.wav" 15
 call :say "First of All, I'm Thanking God." 1
 timeout /t 2 >nul
 call :say "Through Jesus, this creation was made possible." 1
@@ -962,9 +971,9 @@ taskkill /f /im wscript.exe >nul 2>&1
 echo ending...
 echo deleting this file...
 timeout /t 3 >nul
+call :play "ir_end.wav" 1
 echo THE END
 timeout /t 1 >nul
 
-rem CLEAN UP MEMORY AND SELF
 del "%~f0"
 exit /b
