@@ -102,7 +102,7 @@ echo                                                                            
 echo.
 timeout /t 3 >nul
 cls
-
+call :notify "Made by Cerafin C F "
 echo.
 echo.
 echo                .d8888b.  888                                                 88888888888 888      d8b                   8888888b.
@@ -124,7 +124,7 @@ timeout /t 2 >nul
 echo Press any key to continue...
 pause >nul
 taskkill /f /im wscript.exe >nul 2>&1
-call :notify "Made by Cerafin C F "
+
 
 mode con: cols=90 lines=30
 
