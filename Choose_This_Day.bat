@@ -52,7 +52,7 @@ rem ================= CLEAN INTRO =================
 :boot_intro
 color 0A
 cls
-call :play "ir_inter.wav" 1
+call :play "Speech On.wav" 1
 echo.
 echo.
 echo                .d8888b.
@@ -67,6 +67,7 @@ echo.
 echo.
 timeout /t 1 >nul
 cls
+call :play "Speech On.wav" 1
 echo.
 echo.
 echo                .d8888b.  888                                                 88888888888
@@ -82,6 +83,7 @@ echo.
 
 timeout /t 3 >nul
 call :play "Ring05.wav" 2
+timeout /t 1/2 >nul
 cls
 
 echo.
@@ -139,17 +141,29 @@ rem ================= STARTUP LOGIC =================
 if exist "%appdata%\ctd_memory.txt" (
     cls
     echo.
-    echo  [!] A previous path was found in the pattern.
-    echo.
-    echo    1. Continue
-    echo    2. Reset
+timeout /t 2 >nul
+call :play "Alarm03.wav" 1
+    call :say "You have been here before." 1
+timeout /t 3 >nul
+    call :say "I remember you, !name!." 1
+    timeout /t 2 >nul
+    echo. 
+    echo    1. Resume from where you left
+    echo    2. Erase the past
     echo.
     choice /c 12 /n /m " choice: "
     if errorlevel 2 (
+    call :play "Windows Navigation Error.wav" 1
+timeout /t 1 >nul
+    call :say "hmm...." 1
+timeout /t 2 >nul
+    call :say "The system will watch more closely this time." 1
     del "%appdata%\ctd_memory.txt" >nul 2>&1
     set "day_count=0"
     set "good_total=0"
     set "bad_total=0"
+timeout /t 2 >nul
+   cls
     goto :intro  
 )
     
@@ -183,6 +197,16 @@ timeout /t 3 >nul
 set /p name= your name: 
 set "current_phase=intro"
 call :save
+cls
+call :say "all right, %name%." 1
+timeout /t 2 >nul
+call :say "even if the system calls you %username%..." 1
+timeout /t 3 >nul
+cls
+call :say "now watch what happens. " 1
+timeout /t 2 >nul
+call :say "It's a story about a teen. " 1
+timeout /t 2 >nul
 goto day_start
 
 rem ================= SAVE LABEL =================
@@ -196,16 +220,8 @@ rem ================= SAVE LABEL =================
 ) > "%appdata%\ctd_memory.txt"
 exit /b
 
-call :say "all right, %name%." 1
-timeout /t 2 >nul
-call :say "even if the system calls you %username%..." 1
-timeout /t 3 >nul
-cls
-call :say "now watch what happens. " 1
-timeout /t 2 >nul
-call :say "It's a story about a teen. " 1
-timeout /t 2 >nul
-goto day_start
+
+
 
 rem ================= DAY FLOW =================
 :day_start
@@ -222,7 +238,7 @@ rem ================= FRIDAY =================
 :friday
 set "current_phase=friday"
 call :save
-call :play "Alarm01.wav" 
+
 call :say "friday arrives like a door that is already half open." 1
 timeout /t 3 >nul
 call :say "the week is tired." 1
@@ -255,8 +271,9 @@ call :say "-" 1
 call :say "-" 1
 timeout /t 2 >nul
 call :say "[Morning | 6.00 AM]" 1
-timeout /t 2 >nul
-
+call :play "Alarm03.wav" 2
+timeout /t 3 >nul
+taskkill /f /im wscript.exe >nul 2>&1
 call :shuffle_sat_morning
 echo.
 echo what happens?
@@ -336,9 +353,11 @@ timeout /t 2 >nul
 call :say "-" 1
 call :say "-" 1
 call :say "[Morning | 6.00 AM]" 1
-timeout /t 2 >nul
+call :play "Alarm03.wav" 2
+timeout /t 3 >nul
 
 call :shuffle_sun_morning
+taskkill /f /im wscript.exe >nul 2>&1
 echo.
 echo what happens?
 echo.
@@ -408,6 +427,7 @@ rem ================= WEEKDAY FLOW =================
 :weekday_flow
 set "current_phase=weekday_flow"
 call :save
+call :play "Alarm03.wav" 2
 call :say "morning starts before he is ready for it." 1
 timeout /t 2 >nul
 call :say "the alarm ends." 1
@@ -416,7 +436,7 @@ call :say "the phone begins." 1
 timeout /t 3 >nul
 call :say "one habit enters before the others can defend themselves." 1
 timeout /t 2 >nul
-
+taskkill /f /im wscript.exe >nul 2>&1
 call :shuffle_morning
 echo.
 echo what does he do?[type the choice number]
@@ -889,26 +909,16 @@ call :credits
 exit
 
 rem -------------------play========
+rem -------------------play (FOCUS-INDEPENDENT) -------------------
 :play
 set "soundfile=%SystemRoot%\Media\%~1"
-set "loops=%~2"
-
-:: Default to 1 loop if no second argument is provided
-if "%loops%"=="" set "loops=1"
 if not exist "%soundfile%" exit /b
-
-:: Create the VBScript
 echo Set Player = CreateObject("WMPlayer.OCX") > "%temp%\play.vbs"
 echo Player.URL = "%soundfile%" >> "%temp%\play.vbs"
-
-:: Wrap the play and wait logic in a Batch loop
-for /L %%i in (1,1,%loops%) do (
-    echo Player.Controls.Play >> "%temp%\play.vbs"
-    echo While Player.PlayState ^<^> 1 >> "%temp%\play.vbs"
-    echo   WScript.Sleep 100 >> "%temp%\play.vbs"
-    echo Wend >> "%temp%\play.vbs"
-)
-
+echo Player.Controls.Play >> "%temp%\play.vbs"
+echo do while Player.PlayState ^<^> 1 >> "%temp%\play.vbs"
+echo WScript.Sleep 100 >> "%temp%\play.vbs"
+echo loop >> "%temp%\play.vbs"
 start /b wscript.exe "%temp%\play.vbs"
 exit /b
 rem ================= CREDITS =================
