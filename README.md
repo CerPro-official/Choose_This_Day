@@ -49,11 +49,11 @@ Tested on:
 
 ![preview](preview.png)
 
-##👤 About
+###👤 About 
 Created by **Cerafin C F**  
 With assistance from **ChatGPT (OpenAI)**  
 
-## Note
+### Note
 Windows may show a warning before running `.bat` files.  
 This is normal for batch scripts.
 
