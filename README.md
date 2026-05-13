@@ -49,7 +49,7 @@ Tested on:
 
 ![preview](preview.png)
 
-###👤 About 
+### 👤 About 
 Created by **Cerafin C F**  
 With assistance from **ChatGPT (OpenAI)**  
 
