@@ -23,6 +23,7 @@ set "last_weekend_evening="
 set "last_sunday_evening="
 
 cls
+taskkill /f /im wscript.exe >nul 2>&1
 call :play "Windows Proximity Connection.wav" 2
 echo loading.
 timeout /t 1 >nul
@@ -83,7 +84,7 @@ echo.
 
 timeout /t 3 >nul
 call :play "Ring05.wav" 2
-timeout /t 1/2 >nul
+timeout /t 1 >nul
 cls
 
 echo.
@@ -142,9 +143,10 @@ if exist "%appdata%\ctd_memory.txt" (
     cls
     echo.
 timeout /t 2 >nul
-call :play "Alarm03.wav" 1
+call :play "Alarm10.wav" 1
     call :say "You have been here before." 1
 timeout /t 3 >nul
+call :play "chimes.wav" 2
     call :say "I remember you, !name!." 1
     timeout /t 2 >nul
     echo. 
@@ -176,14 +178,15 @@ timeout /t 2 >nul
     )
     cls
     call :play "Speech On.wav" 1
-    call :say "Welcome back, !name!. The pattern continues." 1
+    call :say "Welcome back, !name!. The story continues." 1
     timeout /t 2 >nul
     goto !current_phase!
 )
 exit /b
 
 :intro
-
+call :play "Alarm06.wav" 2
+color 0f
 call :say "every day starts the same way." 1
 timeout /t 4 >nul
 call :say "small choices." 1
@@ -193,8 +196,10 @@ timeout /t 1 >nul
 call :say "most people never notice the pattern." 1
 timeout /t 2 >nul
 call :say "but this story does." 1
+taskkill /f /im wscript.exe >nul 2>&1
 timeout /t 3 >nul
 set /p name= your name: 
+
 set "current_phase=intro"
 call :save
 cls
@@ -909,16 +914,23 @@ call :credits
 exit
 
 rem -------------------play========
-rem -------------------play (FOCUS-INDEPENDENT) -------------------
 :play
 set "soundfile=%SystemRoot%\Media\%~1"
+set "loops=%~2"
+
+:: Default to 1 loop if no second argument is provided
+if "%loops%"=="" set "loops=1"
 if not exist "%soundfile%" exit /b
+:: Create the VBScript
 echo Set Player = CreateObject("WMPlayer.OCX") > "%temp%\play.vbs"
 echo Player.URL = "%soundfile%" >> "%temp%\play.vbs"
-echo Player.Controls.Play >> "%temp%\play.vbs"
-echo do while Player.PlayState ^<^> 1 >> "%temp%\play.vbs"
-echo WScript.Sleep 100 >> "%temp%\play.vbs"
-echo loop >> "%temp%\play.vbs"
+
+:: Wrap the play and wait logic in a Batch loop
+for /L %%i in (1,1,%loops%) do (
+   echo Player.Controls.Play >> "%temp%\play.vbs"
+   echo While Player.PlayState ^<^> 1 >> "%temp%\play.vbs"
+   echo   WScript.Sleep 100 >> "%temp%\play.vbs"
+   echo Wend >> "%temp%\play.vbs")
 start /b wscript.exe "%temp%\play.vbs"
 exit /b
 rem ================= CREDITS =================
@@ -981,7 +993,7 @@ taskkill /f /im wscript.exe >nul 2>&1
 echo ending...
 echo deleting this file...
 timeout /t 3 >nul
-call :play "ir_end.wav" 1
+call :play "chord.wav" 1
 echo THE END
 timeout /t 1 >nul
 
