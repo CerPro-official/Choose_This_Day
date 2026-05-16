@@ -31,7 +31,6 @@ cls
 echo loading..
 timeout /t 1 >nul
 cls
-
 echo loading...
 timeout /t 1 >nul
 cls
@@ -256,7 +255,7 @@ call :say "nothing about the day seems important yet." 1
 timeout /t 3 >nul
 call :say "-" 1
 call :say "-" 1
-call :say "[Morning | 6.00 AM]" 1
+call :say "FRIDAY [Morning | 6.00 AM]" 1
 timeout /t 2 >nul
 
 goto weekday_flow
@@ -275,7 +274,7 @@ call :say "the day stretches out." 1
 call :say "-" 1
 call :say "-" 1
 timeout /t 2 >nul
-call :say "[Morning | 6.00 AM]" 1
+call :say "SATURDAY [Morning | 6.00 AM]" 1
 call :play "Alarm03.wav" 2
 timeout /t 3 >nul
 taskkill /f /im wscript.exe >nul 2>&1
@@ -357,7 +356,7 @@ call :say "sometimes it just means nothing is happening outside." 1
 timeout /t 2 >nul
 call :say "-" 1
 call :say "-" 1
-call :say "[Morning | 6.00 AM]" 1
+call :say "SUNDAY [Morning | 6.00 AM]" 1
 call :play "Alarm03.wav" 2
 timeout /t 3 >nul
 
