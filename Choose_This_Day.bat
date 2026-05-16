@@ -2,7 +2,7 @@
 setlocal EnableExtensions EnableDelayedExpansion
 title Choose_This_Day
 call :resize 170 28
-cls
+
 rem =========================================
 rem Created by Cerafin C F
 rem Project: Choose_This_Day
@@ -126,7 +126,7 @@ taskkill /f /im wscript.exe >nul 2>&1
 
 
 call :resize 90 30
-cls
+
 
 color 0f
 cls
