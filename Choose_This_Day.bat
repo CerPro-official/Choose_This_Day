@@ -2,6 +2,7 @@
 setlocal EnableExtensions EnableDelayedExpansion
 title Choose_This_Day
 call :resize 170 28
+cls
 rem =========================================
 rem Created by Cerafin C F
 rem Project: Choose_This_Day
@@ -41,10 +42,9 @@ echo loading.
 timeout /t 1 >nul
 cls
 taskkill /f /im wscript.exe >nul 2>&1
-call :boot_check
 
- 
-call :boot_intro  
+call :boot_intro 
+call :boot_check 
 goto intro
 
 
@@ -127,6 +127,7 @@ taskkill /f /im wscript.exe >nul 2>&1
 
 
 call :resize 90 30
+cls
 
 color 0f
 cls
@@ -778,7 +779,7 @@ endlocal & exit /b
 
 rem ==================resize-------------------
 :resize
-powershell -command "&{$H=Get-Host;$W=$H.UI.RawUI;$B=$W.BufferSize;$B.Width=%~1;$B.Height=9999;$W.BufferSize=$B;$S=$W.WindowSize;$S.Width=%~1;$S.Height=%~2;$W.WindowSize=$S}"
+powershell -command "&{$H=Get-Host;$W=$H.UI.RawUI;$B=$W.BufferSize;$B.Width=%~1;$B.Height=9999;$W.BufferSize=$B;$S=$W.WindowSize;$S.Width=%~1;$S.Height=%~2;$W.WindowSize=$S}" >nul 2>&1
 exit /b
 rem ================= ENDINGS =================
 
@@ -823,7 +824,40 @@ call :say "not with failure." 1
 timeout /t 2 >nul
 call :say "but with repetition." 1
 timeout /t 3 >nul
-call :say "-The soul of the sluggard craves and gets nothing, while the soul of the diligent is richly supplied.- (Proverbs 13:4)" 1
+set /a bv=%random%%%3
+if !bv!==0 (
+    call :say "-But you, lazybones, how long will you sleep?" 1
+    timeout /t 1 >nul
+    call :say "When will you wake up?" 1
+    timeout /t 1 >nul
+    call :say "A little extra sleep, a little more slumber," 1
+    timeout /t 1 >nul
+    call :say "a little folding of the hands to rest -" 1
+    timeout /t 1 >nul
+    call :say "then poverty will pounce on you like a bandit;" 1
+    timeout /t 1 >nul
+    call :say "scarcity will attack you like an armed robber.-" 1
+    timeout /t 1 >nul
+    call :say "(Proverbs 6:9-11 NLT)" 1
+)
+if !bv!==1 (
+    call :say "-Do not be deceived:" 1
+    timeout /t 1 >nul
+    call :say "God cannot be mocked." 1
+    timeout /t 1 >nul
+    call :say "A man reaps what he sows.-" 1
+    timeout /t 1 >nul
+    call :say "(Galatians 6:7 NIV)" 1
+)
+if !bv!==2 (
+    call :say "-If anyone knows the good they ought to do" 1
+    timeout /t 1 >nul
+    call :say "and doesn't do it," 1
+    timeout /t 1 >nul
+    call :say "it is sin for them.-" 1
+    timeout /t 1 >nul
+    call :say "(James 4:17 NIV)" 1
+)
 timeout /t 3 >nul
 pause
 
@@ -861,8 +895,39 @@ call :say "unnoticed." 1
 timeout /t 2 >nul
 call :say "but real." 1
 timeout /t 3 >nul
-call :say "-God gave us a spirit not of fear but of power... and self-control.- (2 Timothy 1:7)" 1
-
+set /a bv=%random%%%4
+if !bv!==0 (
+    call :say "-The Spirit God gave us does not make us timid," 1
+    timeout /t 1 >nul
+    call :say "but gives us power, love and self-discipline.-" 1
+    timeout /t 1 >nul
+    call :say "(2 Timothy 1:7 NIV)" 1
+)
+if !bv!==1 (
+    call :say "-A sluggard's appetite is never filled," 1
+    timeout /t 1 >nul
+    call :say "but the desires of the diligent are fully satisfied.-" 1
+    timeout /t 1 >nul
+    call :say "(Proverbs 13:4 NIV)" 1
+)
+if !bv!==2 (
+    call :say "-I can do all this" 1
+    timeout /t 1 >nul
+    call :say "through him who gives me strength.-" 1
+    timeout /t 1 >nul
+    call :say "(Philippians 4:13 NIV)" 1
+)
+if !bv!==3 (
+    call :say "-No discipline seems pleasant at the time," 1
+    timeout /t 1 >nul
+    call :say "but painful." 1
+    timeout /t 1 >nul
+    call :say "Later on, however," 1
+    timeout /t 1 >nul
+    call :say "it produces a harvest of righteousness and peace.-" 1
+    timeout /t 1 >nul
+    call :say "(Hebrews 12:11 NIV)" 1
+)
 timeout /t 3 >nul
 taskkill /f /im wscript.exe >nul 2>&1
 pause
@@ -907,7 +972,48 @@ call :say "but awareness." 1
 timeout /t 3 >nul
 call :say "and awareness does not let you go back unchanged." 1
 timeout /t 4 >nul
-call :say "-A double-minded man is unstable in all his ways.-(James 1:8)" 1
+set /a bv=%random%%%5
+if !bv!==0 (
+    call :say "-Such a person is double-minded" 1
+    timeout /t 1 >nul
+    call :say "and unstable in all they do.-" 1
+    timeout /t 1 >nul
+    call :say "(James 1:8 NIV)" 1
+)
+if !bv!==1 (
+    call :say "-For I do not do the good I want to do," 1
+    timeout /t 1 >nul
+    call :say "but the evil I do not want to do -" 1
+    timeout /t 1 >nul
+    call :say "this I keep on doing.-" 1
+    timeout /t 1 >nul
+    call :say "(Romans 7:19 NIV)" 1
+)
+if !bv!==2 (
+    call :say "-The spirit is willing," 1
+    timeout /t 1 >nul
+    call :say "but the flesh is weak.-" 1
+    timeout /t 1 >nul
+    call :say "(Matthew 26:41 NIV)" 1
+)
+if !bv!==3 (
+    call :say "-Do not conform to the pattern of this world," 1
+    timeout /t 1 >nul
+    call :say "but be transformed" 1
+    timeout /t 1 >nul
+    call :say "by the renewing of your mind.-" 1
+    timeout /t 1 >nul
+    call :say "(Romans 12:2 NIV)" 1
+)
+if !bv!==4 (
+    call :say "-You are neither cold nor hot..." 1
+    timeout /t 1 >nul
+    call :say "because you are lukewarm..." 1
+    timeout /t 1 >nul
+    call :say "I am about to spit you out of my mouth.-" 1
+    timeout /t 1 >nul
+    call :say "(Revelation 3:15-16 NIV)" 1
+)
 timeout /t 3 >nul
 taskkill /f /im wscript.exe >nul 2>&1
 pause
@@ -1072,18 +1178,19 @@ call :say "First of All, I'm Thanking God." 1
 timeout /t 2 >nul
 call :say "Through Jesus, this creation was made possible." 1
 timeout /t 2 >nul
-call :say "Concept, design, narrative:" 1
+call :say "concept, design, narrative:" 1
 timeout /t 2 >nul
+
 call :say "Cerafin C F" 1
 call :say "-" 1
 timeout /t 3 >nul
-call :say "AI collaboration and system support:" 1
+call :say "ai collaboration and system support:" 1
 timeout /t 2 >nul
 call :say "ChatGPT (OpenAI) & Gemini (Google) & Claude (Anthropic)" 1
 call :say "-" 1
 
 timeout /t 2 >nul
-call :say "This script is not just code." 1
+call :say "this script is not just code." 1
 timeout /t 2 >nul
 call :say "it is a reflection loop." 1
 timeout /t 4 >nul
