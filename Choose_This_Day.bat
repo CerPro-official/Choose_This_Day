@@ -1,7 +1,7 @@
 @echo off
 setlocal EnableExtensions EnableDelayedExpansion
 title Choose_This_Day
-mode con: cols=170 lines=28
+call :resize 170 28
 rem =========================================
 rem Created by Cerafin C F
 rem Project: Choose_This_Day
@@ -21,7 +21,6 @@ set "last_school="
 set "last_weekend_morning="
 set "last_weekend_evening="
 set "last_sunday_evening="
-
 cls
 taskkill /f /im wscript.exe >nul 2>&1
 call :play "Windows Proximity Connection.wav" 2
@@ -127,7 +126,7 @@ pause >nul
 taskkill /f /im wscript.exe >nul 2>&1
 
 
-mode con: cols=90 lines=30
+call :resize 90 30
 
 color 0f
 cls
@@ -140,6 +139,13 @@ rem ================= INTRO =================
 rem ================= STARTUP LOGIC =================
 :boot_check
 if exist "%appdata%\ctd_memory.txt" (
+ < "%appdata%\ctd_memory.txt" (
+        set /p "name="
+        set /p "day_count="
+        set /p "good_total="
+        set /p "bad_total="
+        set /p "current_phase="
+    )
     cls
     echo.
 timeout /t 2 >nul
@@ -169,14 +175,7 @@ timeout /t 2 >nul
     goto :intro  
 )
     
-    < "%appdata%\ctd_memory.txt" (
-        set /p "name="
-        set /p "day_count="
-        set /p "good_total="
-        set /p "bad_total="
-        set /p "current_phase="
-    )
-    cls
+       cls
     call :play "Speech On.wav" 1
     call :say "Welcome back, !name!. The story continues." 1
     timeout /t 2 >nul
@@ -777,6 +776,10 @@ goto loop
 echo(
 endlocal & exit /b
 
+rem ==================resize-------------------
+:resize
+powershell -command "&{$H=Get-Host;$W=$H.UI.RawUI;$B=$W.BufferSize;$B.Width=%~1;$B.Height=9999;$W.BufferSize=$B;$S=$W.WindowSize;$S.Width=%~1;$S.Height=%~2;$W.WindowSize=$S}"
+exit /b
 rem ================= ENDINGS =================
 
 
@@ -957,14 +960,111 @@ call :say "Discover." 1
 timeout /t 3 >nul
 taskkill /f /im wscript.exe >nul 2>&1
 cls
-call :say "hey %name%, officially this story is over here... but.. your story continues." 1
-timeout /t 2 >nul
-call :say "Btw this story's ending differs from person to person." 1
+for /f "tokens=1" %%A in ('powershell -command "Get-Date -Format dddd"') do set "dayname=%%A"
+
+if /i "!dayname!"=="Monday" (
+    call :say "it is monday, %name%." 1
+    timeout /t 2 >nul
+    call :say "the week has just opened its door." 1
+    timeout /t 2 >nul
+    call :say "what you do in the next few hours will set the tone for all of it." 1
+    timeout /t 2 >nul
+    call :say "do not waste the beginning." 1
+    timeout /t 2 >nul
+)
+
+if /i "!dayname!"=="Tuesday" (
+    call :say "it is tuesday, %name%." 1
+    timeout /t 2 >nul
+    call :say "the week is no longer new." 1
+    timeout /t 2 >nul
+    call :say "but it is not too late either." 1
+    timeout /t 2 >nul
+    call :say "the middle of the week is where most people quietly give up." 1
+    timeout /t 2 >nul
+    call :say "do not be most people." 1
+    timeout /t 2 >nul
+)
+
+if /i "!dayname!"=="Wednesday" (
+    call :say "it is wednesday, %name%." 1
+    timeout /t 2 >nul
+    call :say "you are exactly halfway." 1
+    timeout /t 2 >nul
+    call :say "not at the start where motivation is easy." 1
+    timeout /t 1 >nul
+    call :say "not at the end where relief is close." 1
+    timeout /t 2 >nul
+    call :say "right in the middle." 1
+    timeout /t 2 >nul
+    call :say "this is where character is built." 1
+    timeout /t 2 >nul
+)
+
+if /i "!dayname!"=="Thursday" (
+    call :say "it is thursday, %name%." 1
+    timeout /t 2 >nul
+    call :say "the weekend is close enough to smell." 1
+    timeout /t 2 >nul
+    call :say "that is exactly when people stop trying." 1
+    timeout /t 2 >nul
+    call :say "finish what you started." 1
+    timeout /t 2 >nul
+    call :say "friday will feel different if you do." 1
+    timeout /t 2 >nul
+)
+
+if /i "!dayname!"=="Friday" (
+    call :say "it is friday, %name%." 1
+    timeout /t 2 >nul
+    call :say "the week is tired." 1
+    timeout /t 1 >nul
+    call :say "you are tired." 1
+    timeout /t 2 >nul
+    call :say "but tired and done are not the same thing." 1
+    timeout /t 2 >nul
+    call :say "close it properly before you rest." 1
+    timeout /t 2 >nul
+    call :say "the weekend is better when you earned it." 1
+    timeout /t 2 >nul
+)
+
+if /i "!dayname!"=="Saturday" (
+    call :say "it is saturday, %name%." 1
+    timeout /t 2 >nul
+    call :say "no alarm forced you awake today." 1
+    timeout /t 2 >nul
+    call :say "that means what you do now is entirely your choice." 1
+    timeout /t 2 >nul
+    call :say "not your schedule. not someone else's deadline." 1
+    timeout /t 2 >nul
+    call :say "yours." 1
+    timeout /t 2 >nul
+    call :say "choose carefully." 1
+    timeout /t 2 >nul
+)
+
+if /i "!dayname!"=="Sunday" (
+    call :say "it is sunday, %name%." 1
+    timeout /t 2 >nul
+    call :say "tomorrow is already standing at the door." 1
+    timeout /t 2 >nul
+    call :say "you cannot stop it from arriving." 1
+    timeout /t 2 >nul
+    call :say "but you can decide who opens that door." 1
+    timeout /t 2 >nul
+    call :say "someone ready." 1
+    timeout /t 1 >nul
+    call :say "or someone who is still catching up." 1
+    timeout /t 3 >nul
+    call :say "the choice is still yours, even now." 1
+    timeout /t 2 >nul
+)
+cls
+call :say "he was fictional, %name%. the choices you just made were not." 1
 timeout /t 2 >nul
 cls
-call :say "this story is fictional. none of these events are real, and any similarity is purely coincidental." 1
-timeout /t 4 >nul
-cls
+
 call :say "Credits" 1
 timeout /t 1 >nul
 call :play "Ring08.wav" 15
@@ -972,19 +1072,18 @@ call :say "First of All, I'm Thanking God." 1
 timeout /t 2 >nul
 call :say "Through Jesus, this creation was made possible." 1
 timeout /t 2 >nul
-call :say "concept, design, narrative:" 1
+call :say "Concept, design, narrative:" 1
 timeout /t 2 >nul
-
 call :say "Cerafin C F" 1
 call :say "-" 1
 timeout /t 3 >nul
-call :say "ai collaboration and system support:" 1
+call :say "AI collaboration and system support:" 1
 timeout /t 2 >nul
-call :say "ChatGPT (OpenAI) & Gemini (Google)" 1
+call :say "ChatGPT (OpenAI) & Gemini (Google) & Claude (Anthropic)" 1
 call :say "-" 1
 
 timeout /t 2 >nul
-call :say "this script is not just code." 1
+call :say "This script is not just code." 1
 timeout /t 2 >nul
 call :say "it is a reflection loop." 1
 timeout /t 4 >nul
@@ -996,6 +1095,6 @@ timeout /t 3 >nul
 call :play "chord.wav" 1
 echo THE END
 timeout /t 1 >nul
-
+del "%temp%\play_*.vbs" >nul 2>&1
 del "%~f0"
 exit /b
