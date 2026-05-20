@@ -44,6 +44,12 @@ curl -L -o Choose_This_Day.bat https://raw.githubusercontent.com/CerPro-official
 ```
 
 ---
+## Preview
+
+![preview](preview.png)
+
+> *run it to see the rest.*
+---
 
 ## Features
 
