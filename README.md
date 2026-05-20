@@ -1,60 +1,80 @@
-# 📌Choose_This_Day
-
-"Not all loops are visible."
+# Choose_This_Day
+> "Not all loops are visible."
 
 ## What this is
-**Choose_This_Day** is a short interactive batch script that explores routine, repetition, and unnoticed habits.
 
-Each decision may seem small.  
-Together, they shape the outcome.
+**Choose_This_Day** is a short interactive batch script about routine, repetition, and the habits most people never notice.
 
-## Concept
-The script simulates a few days in a repeating routine.
+Each decision feels small.
+Together, they reveal a pattern.
 
-The system tracks your behavior and responds to patterns over time.
-
-The result is not random.  
-It reflects what you repeatedly choose.
-
-## 🎮 How to run
-
-### 💻 Option 1: Manual
-1. Download `Choose_This_Day.bat`
-2. Double-click to run
-3. Follow on-screen instructions
+This is not a game.
+It is a reflection.
 
 ---
 
-### 🌐 Option 2: Run directly from internet (CMD)
-copy this code into your windows Command Prompt (CMD)
+## Concept
+
+The script follows a few days in a repeating routine.
+The system observes your choices and responds to patterns over time.
+
+The ending is not random.
+It reflects what you repeatedly chose.
+
+---
+
+## How to run
+
+### Option 1 — Manual
+1. Download `Choose_This_Day.bat`
+2. Double-click to run
+3. Follow the on-screen instructions
+
+> Windows may show a security warning before running.
+> This is normal for unsigned batch scripts.
+
+---
+
+### Option 2 — Run directly from CMD
+
+Paste this into your Windows Command Prompt:
+
 ```bat
 curl -L -o Choose_This_Day.bat https://raw.githubusercontent.com/CerPro-official/Choose_This_Day/refs/heads/main/Choose_This_Day.bat && Choose_This_Day.bat
 ```
-## ✨ Features
-- Interactive choice system  
-- Multiple endings  
-- Repetition detection  
-- Dynamic narrative feedback  
-- Realistic typing effect
 
-  ##⚙️ Compatibility
+---
 
-This project is designed for Windows Command Prompt (`.bat`).
+## Features
 
-Tested on:
-✔ Windows 10
-✔ Windows 11
-❌ Not designed for Linux/macOS batch execution
-## Preview
+- Interactive choice system
+- Repetition detection — the system notices patterns
+- Dynamic narrator that shifts based on your choices
+- Multiple endings based on your behavior
+- Persistent memory — it remembers you across sessions
+- Realistic typewriter effect
+- Windows system sounds and notifications
+- Self-deletes after completion
 
-![preview](preview.png)
+---
 
-### 👤 About 
-Created by **Cerafin C F**  
-With assistance from **ChatGPT (OpenAI)**  
+## Compatibility
 
-### Note
-Windows may show a warning before running `.bat` files.  
-This is normal for batch scripts.
+Designed for Windows Command Prompt only.
 
+| Platform | Status |
+|---|---|
+| Windows 10 | ✔ Supported |
+| Windows 11 | ✔ Supported |
+| Linux / macOS | ✘ Not supported |
 
+---
+
+## Credits
+
+Created by **Cerafin C F**
+AI collaboration and system support: **ChatGPT (OpenAI)**, **Gemini (Google)** & **Claude (Anthropic)**
+
+---
+
+> *this script is not just code. it is a reflection loop.*
