@@ -209,7 +209,11 @@ timeout /t 3 >nul
 cls
 call :say "now watch what happens. " 1
 timeout /t 2 >nul
-call :say "It's a story about a teen. " 1
+call :say "this is a story about a teen." 1
+timeout /t 1 >nul
+call :say "you will make his choices." 1
+timeout /t 3 >nul
+call :say "choose the way you actually would." 1
 timeout /t 2 >nul
 goto day_start
 
@@ -253,8 +257,8 @@ call :say "school, phone, home, sleep." 1
 timeout /t 1 >nul
 call :say "nothing about the day seems important yet." 1
 timeout /t 3 >nul
-call :say "-" 1
-call :say "-" 1
+echo.
+echo.
 call :say "FRIDAY [Morning | 6.00 AM]" 1
 timeout /t 2 >nul
 
@@ -271,8 +275,8 @@ timeout /t 2 >nul
 call :say "there is no school to hide behind." 1
 timeout /t 3 >nul
 call :say "the day stretches out." 1
-call :say "-" 1
-call :say "-" 1
+echo.
+echo.
 timeout /t 2 >nul
 call :say "SATURDAY [Morning | 6.00 AM]" 1
 call :play "Alarm03.wav" 2
@@ -303,8 +307,8 @@ goto saturday_evening
 :saturday_evening
 set "current_phase=saturday_evening"
 call :save
-call :say "-" 1
-call :say "-" 1
+echo.
+echo.
 call :say "Later that day" 1
 timeout /t 1 >nul
 call :say "[Evening | 5.00 PM]" 1
@@ -336,7 +340,7 @@ goto saturday_night
 :saturday_night
 set "current_phase=saturday_night"
 call :save
-call :say "saturday night is heavier than the last." 1
+call :say "saturday night feels heavier." 1
 timeout /t 2 >nul
 
 call :say "the weekend is slipping away." 1
@@ -354,8 +358,8 @@ call :say "but quiet does not mean peace." 1
 timeout /t 3 >nul
 call :say "sometimes it just means nothing is happening outside." 1
 timeout /t 2 >nul
-call :say "-" 1
-call :say "-" 1
+echo.
+echo.
 call :say "SUNDAY [Morning | 6.00 AM]" 1
 call :play "Alarm03.wav" 2
 timeout /t 3 >nul
@@ -385,8 +389,8 @@ goto sunday_evening
 :sunday_evening
 set "current_phase=sunday_evening"
 call :save
-call :say "-" 1
-call :say "-" 1
+echo.
+echo.
 call :say "[Evening | 7.00 PM]" 1
 timeout /t 2 >nul
 call :say "the weekend is almost gone." 1
@@ -443,7 +447,7 @@ timeout /t 2 >nul
 taskkill /f /im wscript.exe >nul 2>&1
 call :shuffle_morning
 echo.
-echo what does he do?[type the choice number]
+echo what does he do? [type the choice number]
 timeout /t 1 >nul
 echo.
 echo    1. !opt1!
@@ -499,7 +503,7 @@ rem ================= FRIDAY NIGHT =================
 set "current_phase=friday_night"
 call :save
 call :say "night returns with the same face." 1
-call :say "He says - tomorrow will be my day." 1
+call :say "he says - tomorrow will be my day." 1
 timeout /t 2 >nul
 call :say "the sentence is familiar." 1
 timeout /t 1 >nul
@@ -1103,7 +1107,7 @@ if /i "!dayname!"=="Wednesday" (
     call :say "right in the middle." 1
     timeout /t 2 >nul
     call :say "this is where character is built." 1
-    timeout /t 2 >nul
+    timeout /t 3 >nul
 )
 
 if /i "!dayname!"=="Thursday" (
@@ -1116,7 +1120,7 @@ if /i "!dayname!"=="Thursday" (
     call :say "finish what you started." 1
     timeout /t 2 >nul
     call :say "friday will feel different if you do." 1
-    timeout /t 2 >nul
+    timeout /t 3 >nul
 )
 
 if /i "!dayname!"=="Friday" (
@@ -1131,7 +1135,7 @@ if /i "!dayname!"=="Friday" (
     call :say "close it properly before you rest." 1
     timeout /t 2 >nul
     call :say "the weekend is better when you earned it." 1
-    timeout /t 2 >nul
+    timeout /t 3 >nul
 )
 
 if /i "!dayname!"=="Saturday" (
@@ -1146,7 +1150,7 @@ if /i "!dayname!"=="Saturday" (
     call :say "yours." 1
     timeout /t 2 >nul
     call :say "choose carefully." 1
-    timeout /t 2 >nul
+    timeout /t 3 >nul
 )
 
 if /i "!dayname!"=="Sunday" (
@@ -1163,30 +1167,30 @@ if /i "!dayname!"=="Sunday" (
     call :say "or someone who is still catching up." 1
     timeout /t 3 >nul
     call :say "the choice is still yours, even now." 1
-    timeout /t 2 >nul
+    timeout /t 3 >nul
 )
 cls
 call :say "he was fictional, %name%. the choices you just made were not." 1
-timeout /t 2 >nul
+timeout /t 4 >nul
 cls
 
 call :say "Credits" 1
 timeout /t 1 >nul
 call :play "Ring08.wav" 15
-call :say "First of All, I'm Thanking God." 1
+call :say "First of all, I'm thanking God." 1
 timeout /t 2 >nul
 call :say "Through Jesus, this creation was made possible." 1
-timeout /t 2 >nul
+timeout /t 3 >nul
 call :say "concept, design, narrative:" 1
 timeout /t 2 >nul
 
 call :say "Cerafin C F" 1
-call :say "-" 1
-timeout /t 3 >nul
-call :say "ai collaboration and system support:" 1
+echo.
+timeout /t 4 >nul
+call :say "AI collaboration and system support:" 1
 timeout /t 2 >nul
-call :say "ChatGPT (OpenAI) & Gemini (Google) & Claude (Anthropic)" 1
-call :say "-" 1
+call :say "ChatGPT (OpenAI), Gemini (Google) & Claude (Anthropic)" 1
+echo.
 
 timeout /t 2 >nul
 call :say "this script is not just code." 1
