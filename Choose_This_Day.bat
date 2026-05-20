@@ -26,19 +26,34 @@ cls
 taskkill /f /im wscript.exe >nul 2>&1
 call :play "Windows Proximity Connection.wav" 2
 echo loading.
+echo.
+echo    for the best experience, turn your volume up.
+echo.
 timeout /t 1 >nul
 cls
 echo loading..
+echo.
+echo    for the best experience, turn your volume up.
+echo.
 timeout /t 1 >nul
 cls
 echo loading...
+echo.
+echo    for the best experience, turn your volume up.
+echo.
 timeout /t 1 >nul
 cls
 echo loading..
+echo.
+echo    for the best experience, turn your volume up.
+echo.
 timeout /t 1 >nul
 cls
 echo loading.
-timeout /t 1 >nul
+echo.
+echo    for the best experience, turn your volume up.
+echo.
+timeout /t 2 >nul
 cls
 taskkill /f /im wscript.exe >nul 2>&1
 
@@ -681,8 +696,15 @@ exit /b
 :swap
 set /a r1=!random!%%3+1
 set /a r2=!random!%%3+1
+if !r1!==!r2! exit /b
 
-for %%A in (!r1!) do for %%B in (!r2!) do ( call set "t=%%map%%A%%" call set "map%%A=%%map%%B%%" set "map%%B=!t!" call set "t=%%opt%%A%%" call set "opt%%A=%%opt%%B%%" set "opt%%B=!t!")
+set "tmp=!map%r1%!"
+set "map%r1%=!map%r2%!"
+set "map%r2%=!tmp!"
+
+set "tmp=!opt%r1%!"
+set "opt%r1%=!opt%r2%!"
+set "opt%r2%=!tmp!"
 
 exit /b
 rem ================= MODERN NOTIFY (FIXED) =================
@@ -1057,7 +1079,7 @@ call :say "than by the ones you did do." 1
 timeout /t 4 >nul
 call :say "So throw off the bowlines." 1
 timeout /t 2 >nul
-call :say " Catch the trade winds in your sails." 1
+call :say "Catch the trade winds in your sails." 1
 timeout /t 3 >nul
 call :say "Sail away from the safe harbor." 1
 timeout /t 2 >nul
