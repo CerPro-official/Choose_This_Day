@@ -27,31 +27,31 @@ taskkill /f /im wscript.exe >nul 2>&1
 call :play "Windows Proximity Connection.wav" 2
 echo loading.
 echo.
-echo    for the best experience, turn your volume up.
+echo    For the best experience, turn your volume up.
 echo.
 timeout /t 1 >nul
 cls
 echo loading..
 echo.
-echo    for the best experience, turn your volume up.
+echo    For the best experience, turn your volume up.
 echo.
 timeout /t 1 >nul
 cls
 echo loading...
 echo.
-echo    for the best experience, turn your volume up.
+echo    For the best experience, turn your volume up.
 echo.
 timeout /t 1 >nul
 cls
 echo loading..
 echo.
-echo    for the best experience, turn your volume up.
+echo    For the best experience, turn your volume up.
 echo.
 timeout /t 1 >nul
 cls
 echo loading.
 echo.
-echo    for the best experience, turn your volume up.
+echo    For the best experience, turn your volume up.
 echo.
 timeout /t 2 >nul
 cls
@@ -97,7 +97,6 @@ echo.
 
 timeout /t 3 >nul
 call :play "Ring05.wav" 2
-timeout /t 1 >nul
 cls
 
 echo.
