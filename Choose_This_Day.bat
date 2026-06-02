@@ -228,7 +228,7 @@ timeout /t 1 >nul
 call :say "you will make his choices." 1
 timeout /t 3 >nul
 call :say "choose the way you actually would." 1
-timeout /t 2 >nul
+timeout /t 4 >nul
 goto day_start
 
 rem ================= SAVE LABEL =================
@@ -297,9 +297,11 @@ call :play "Alarm03.wav" 2
 timeout /t 3 >nul
 taskkill /f /im wscript.exe >nul 2>&1
 call :shuffle_sat_morning
+color 0E
 echo.
 echo what happens?
 echo.
+color 0F
 echo    1. !opt1!
 echo    2. !opt2!
 echo    3. !opt3!
@@ -332,9 +334,11 @@ timeout /t 1 >nul
 call :say "the day is still there, but thinner now." 1
 
 call :shuffle_sat_evening
+color 0E
 echo.
 echo what does he do?
 echo.
+color 0F
 echo    1. !opt1!
 echo    2. !opt2!
 echo    3. !opt3!
@@ -380,9 +384,11 @@ timeout /t 3 >nul
 
 call :shuffle_sun_morning
 taskkill /f /im wscript.exe >nul 2>&1
+color 0E
 echo.
 echo what happens?
 echo.
+color 0F
 echo    1. !opt1!
 echo    2. !opt2!
 echo    3. !opt3!
@@ -413,10 +419,11 @@ call :say "tomorrow is already waiting." 1
 timeout /t 2 >nul
 
 call :shuffle_sun_evening
-
+color 0E
 echo.
 echo what does he do?
 echo.
+color 0F
 echo    1. !opt1!
 echo    2. !opt2!
 echo    3. !opt3!
@@ -460,8 +467,10 @@ call :say "one habit enters before the others can defend themselves." 1
 timeout /t 2 >nul
 taskkill /f /im wscript.exe >nul 2>&1
 call :shuffle_morning
+color 0E
 echo.
 echo what does he do? [type the choice number]
+color 0F
 timeout /t 1 >nul
 echo.
 echo    1. !opt1!
@@ -492,9 +501,11 @@ call :say "unfinished things always wait more loudly." 1
 timeout /t 2 >nul
 
 call :shuffle_school
+color 0E
 echo.
 echo what does he do?
 echo.
+color 0F
 echo    1. !opt1!
 echo    2. !opt2!
 echo    3. !opt3!
@@ -728,12 +739,14 @@ endlocal
 exit /b
 rem ================= BOX NARRATOR =================
 :box
+color 08
 timeout /t 1 >nul
 echo.
 echo +------------------------------------------------+
 echo ^| %~1 ^|
 echo +------------------------------------------------+
 echo.
+color 0F
 exit /b
 rem ================= POPUP NARRATOR =================
 :popup
@@ -848,6 +861,7 @@ call :say "not with failure." 1
 timeout /t 2 >nul
 call :say "but with repetition." 1
 timeout /t 3 >nul
+color 0E
 set /a bv=%random%%%3
 if !bv!==0 (
     call :say "-But you, lazybones, how long will you sleep?" 1
@@ -882,7 +896,9 @@ if !bv!==2 (
     timeout /t 1 >nul
     call :say "(James 4:17 NIV)" 1
 )
+taskkill /f /im wscript.exe >nul 2>&1
 timeout /t 3 >nul
+color 0F
 pause
 
 cls
@@ -919,6 +935,7 @@ call :say "unnoticed." 1
 timeout /t 2 >nul
 call :say "but real." 1
 timeout /t 3 >nul
+color 0E
 set /a bv=%random%%%4
 if !bv!==0 (
     call :say "-The Spirit God gave us does not make us timid," 1
@@ -952,6 +969,7 @@ if !bv!==3 (
     timeout /t 1 >nul
     call :say "(Hebrews 12:11 NIV)" 1
 )
+color 0F
 timeout /t 3 >nul
 taskkill /f /im wscript.exe >nul 2>&1
 pause
@@ -996,6 +1014,7 @@ call :say "but awareness." 1
 timeout /t 3 >nul
 call :say "and awareness does not let you go back unchanged." 1
 timeout /t 4 >nul
+color 0E
 set /a bv=%random%%%5
 if !bv!==0 (
     call :say "-Such a person is double-minded" 1
@@ -1038,6 +1057,7 @@ if !bv!==4 (
     timeout /t 1 >nul
     call :say "(Revelation 3:15-16 NIV)" 1
 )
+color 0F
 timeout /t 3 >nul
 taskkill /f /im wscript.exe >nul 2>&1
 pause
@@ -1090,6 +1110,7 @@ call :say "Discover." 1
 timeout /t 3 >nul
 taskkill /f /im wscript.exe >nul 2>&1
 cls
+color 0B
 for /f "tokens=1" %%A in ('powershell -command "Get-Date -Format dddd"') do set "dayname=%%A"
 
 if /i "!dayname!"=="Monday" (
@@ -1194,7 +1215,7 @@ cls
 call :say "he was fictional, %name%. the choices you just made were not." 1
 timeout /t 4 >nul
 cls
-
+color 09
 call :say "Credits" 1
 timeout /t 1 >nul
 call :play "Ring08.wav" 15
@@ -1210,7 +1231,9 @@ echo.
 timeout /t 4 >nul
 call :say "AI collaboration and system support:" 1
 timeout /t 2 >nul
+color 0A
 call :say "ChatGPT (OpenAI), Gemini (Google) & Claude (Anthropic)" 1
+color 0F
 echo.
 
 timeout /t 2 >nul
@@ -1226,6 +1249,6 @@ timeout /t 3 >nul
 call :play "chord.wav" 1
 echo THE END
 timeout /t 1 >nul
-del "%temp%\play_*.vbs" >nul 2>&1
+del "%temp%\play.vbs" >nul 2>&1
 del "%~f0"
 exit /b
