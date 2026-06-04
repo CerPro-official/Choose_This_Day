@@ -297,7 +297,7 @@ call :play "Alarm03.wav" 2
 timeout /t 3 >nul
 taskkill /f /im wscript.exe >nul 2>&1
 call :shuffle_sat_morning
-color 0E
+
 echo.
 echo what happens?
 echo.
@@ -334,7 +334,7 @@ timeout /t 1 >nul
 call :say "the day is still there, but thinner now." 1
 
 call :shuffle_sat_evening
-color 0E
+
 echo.
 echo what does he do?
 echo.
@@ -384,7 +384,7 @@ timeout /t 3 >nul
 
 call :shuffle_sun_morning
 taskkill /f /im wscript.exe >nul 2>&1
-color 0E
+
 echo.
 echo what happens?
 echo.
@@ -419,7 +419,7 @@ call :say "tomorrow is already waiting." 1
 timeout /t 2 >nul
 
 call :shuffle_sun_evening
-color 0E
+
 echo.
 echo what does he do?
 echo.
@@ -467,7 +467,7 @@ call :say "one habit enters before the others can defend themselves." 1
 timeout /t 2 >nul
 taskkill /f /im wscript.exe >nul 2>&1
 call :shuffle_morning
-color 0E
+
 echo.
 echo what does he do? [type the choice number]
 color 0F
@@ -501,7 +501,7 @@ call :say "unfinished things always wait more loudly." 1
 timeout /t 2 >nul
 
 call :shuffle_school
-color 0E
+
 echo.
 echo what does he do?
 echo.
@@ -538,7 +538,7 @@ goto day_start
 
 rem ================= EVALUATION =================
 :evaluate
-
+color 0E
 if %bad_total% GEQ 5 goto loop_end
 if %good_total% GEQ 5 goto disciplined_end
 
@@ -739,14 +739,13 @@ endlocal
 exit /b
 rem ================= BOX NARRATOR =================
 :box
-color 08
+
 timeout /t 1 >nul
 echo.
 echo +------------------------------------------------+
 echo ^| %~1 ^|
 echo +------------------------------------------------+
 echo.
-color 0F
 exit /b
 rem ================= POPUP NARRATOR =================
 :popup
@@ -861,7 +860,7 @@ call :say "not with failure." 1
 timeout /t 2 >nul
 call :say "but with repetition." 1
 timeout /t 3 >nul
-color 0E
+
 set /a bv=%random%%%3
 if !bv!==0 (
     call :say "-But you, lazybones, how long will you sleep?" 1
@@ -935,7 +934,7 @@ call :say "unnoticed." 1
 timeout /t 2 >nul
 call :say "but real." 1
 timeout /t 3 >nul
-color 0E
+
 set /a bv=%random%%%4
 if !bv!==0 (
     call :say "-The Spirit God gave us does not make us timid," 1
@@ -1014,7 +1013,7 @@ call :say "but awareness." 1
 timeout /t 3 >nul
 call :say "and awareness does not let you go back unchanged." 1
 timeout /t 4 >nul
-color 0E
+
 set /a bv=%random%%%5
 if !bv!==0 (
     call :say "-Such a person is double-minded" 1
@@ -1231,11 +1230,8 @@ echo.
 timeout /t 4 >nul
 call :say "AI collaboration and system support:" 1
 timeout /t 2 >nul
-color 0A
 call :say "ChatGPT (OpenAI), Gemini (Google) & Claude (Anthropic)" 1
-color 0F
 echo.
-
 timeout /t 2 >nul
 call :say "this script is not just code." 1
 timeout /t 2 >nul
@@ -1252,3 +1248,10 @@ timeout /t 1 >nul
 del "%temp%\play.vbs" >nul 2>&1
 del "%~f0"
 exit /b
+echo.
+echo Press C within 10 seconds to cancel shutdown.
+choice /c CY /t 10 /d Y >nul
+
+if errorlevel 2 (
+    shutdown /s /t 20 /c "Don't waste the hours you were given."
+)
