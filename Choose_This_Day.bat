@@ -276,12 +276,9 @@ timeout /t 2 >nul
 call :say "school, phone, home, sleep." 1
 timeout /t 1 >nul
 call :say "nothing about the day seems important yet." 1
-timeout /t 3 >nul
 echo.
 echo.
-echo FRIDAY [Morning | 6.00 AM]
-timeout /t 2 >nul
-
+echo FRIDAY [Morning ^| 6.00 AM]
 goto weekday_flow
 
 rem ================= SATURDAY =================
@@ -298,7 +295,7 @@ call :say "the day stretches out." 1
 echo.
 echo.
 timeout /t 2 >nul
-echo SATURDAY [Morning | 6.00 AM]
+echo SATURDAY [Morning ^| 6.00 AM]
 call :play "Alarm03.wav" 2
 timeout /t 3 >nul
 taskkill /f /im wscript.exe >nul 2>&1
@@ -333,7 +330,7 @@ echo.
 echo.
 call :say "Later that day" 1
 timeout /t 1 >nul
-echo [Evening | 5.00 PM]
+echo [Evening ^| 5.00 PM]
 timeout /t 2 >nul
 call :say "evening comes." 1
 timeout /t 1 >nul
@@ -384,7 +381,7 @@ call :say "sometimes it just means nothing is happening outside." 1
 timeout /t 2 >nul
 echo.
 echo.
-echo SUNDAY [Morning | 6.00 AM]
+echo SUNDAY [Morning ^| 6.00 AM]
 call :play "Alarm03.wav" 2
 timeout /t 3 >nul
 
@@ -417,7 +414,7 @@ set "current_phase=sunday_evening"
 call :save
 echo.
 echo.
-echo [Evening | 7.00 PM]"
+echo [Evening ^| 7.00 PM]"
 timeout /t 2 >nul
 call :say "the weekend is almost gone." 1
 timeout /t 2 >nul
