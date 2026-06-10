@@ -1248,10 +1248,9 @@ cls
 taskkill /f /im wscript.exe >nul 2>&1
 call :play "chord.wav" 1
 echo THE END?
-timeout /t 4
 taskkill /f /im wscript.exe >nul 2>&1
 if exist "%temp%\play.vbs" del /f /q "%temp%\play.vbs" >nul 2>&1
-timeout /t 4
+timeout /t 4 >nul
 cls
 call :say "You have ten seconds." 1
 timeout /t 1 >nul
