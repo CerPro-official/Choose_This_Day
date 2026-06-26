@@ -361,6 +361,8 @@ goto saturday_night
 :saturday_night
 set "current_phase=saturday_night"
 call :save
+echo. 
+echo.
 call :say "saturday night feels heavier." 1
 timeout /t 2 >nul
 
@@ -414,7 +416,7 @@ set "current_phase=sunday_evening"
 call :save
 echo.
 echo.
-echo [Evening ^| 7.00 PM]"
+echo [Evening ^| 7.00 PM]
 timeout /t 2 >nul
 call :say "the weekend is almost gone." 1
 timeout /t 2 >nul
@@ -453,6 +455,7 @@ call :say "night arrives." 1
 call :say "the week stands there in pieces." 1
 timeout /t 2 >nul
 call :say "something has been learned." 1
+timeout /t 2 >nul
 goto evaluate
 
 rem ================= WEEKDAY FLOW =================
@@ -474,7 +477,7 @@ call :shuffle_morning
 echo.
 echo what does he do? [type the choice number]
 color 0F
-timeout /t 1 >nul
+timeout /t 2 >nul
 echo.
 echo    1. !opt1!
 echo    2. !opt2!
@@ -496,6 +499,8 @@ goto school
 :school
 set "current_phase=school"
 call :save
+echo.
+echo.
 call :say "school feels the same from the outside." 1
 timeout /t 3 >nul
 call :say "inside, a task is waiting." 1
@@ -841,26 +846,27 @@ timeout /t 3 >nul
 call :say "they became default." 1
 timeout /t 1 >nul
 call :say "automatic." 1
-timeout /t 1 >nul
-call :say "quiet. and..." 1
 timeout /t 2 >nul
-call :say "dangerous." 1
+call :say "quiet. and..." 1
 timeout /t 3 >nul
+call :say "dangerous." 1
+timeout /t 4 >nul
 call :say "time moved forward." 1
 timeout /t 1 >nul
 call :say "but nothing inside him moved with it." 1
-timeout /t 3 >nul
+timeout /t 4 >nul
 call :say "days passed." 1
 timeout /t 2 >nul
 call :say "then weeks." 1
-timeout /t 1 >nul
+timeout /t 3 >nul
 call :say "and the pattern remained untouched." 1
 timeout /t 3 >nul
 call :say "he once said: tomorrow i will fix it." 1
 timeout /t 3 >nul
 call :say "now even that sentence is gone." 1
-timeout /t 3 >nul
+timeout /t 4 >nul
 call :say "this is how it happens." 1
+timeout /t 2 >nul
 call :say "not with failure." 1
 timeout /t 2 >nul
 call :say "but with repetition." 1
@@ -916,29 +922,37 @@ call :play "Ring04.wav" 15
 call :say "something changed." 1
 timeout /t 3 >nul
 call :say "it was small enough to ignore." 1
-call :say "but it was not ignored." 1
 timeout /t 3 >nul
-call :say "a single moment resisted the pattern." 1
-call :say "then another." 1
-call :say "not perfectly." 1
+call :say "but it was not ignored." 1
 timeout /t 2 >nul
+call :say "a single moment resisted the pattern." 1
+timeout /t 1 >nul
+call :say "then another." 1
+timeout /t 1 >nul
+call :say "not perfectly." 1
+timeout /t 3 >nul
 call :say "not consistently." 1
+timeout /t 2 >nul
 call :say "but enough." 1
 timeout /t 3 >nul
 call :say "discipline did not arrive as motivation." 1
 timeout /t 2 >nul
 call :say "it arrived as interruption." 1
+timeout /t 4 >nul
 call :say "a break in the automatic." 1
 timeout /t 3 >nul
 call :say "the delay was not allowed to win every time." 1
+timeout /t 2 >nul
 call :say "and that was new." 1
 timeout /t 3 >nul
 call :say "this is how it begins." 1
+timeout /t 2 >nul
 call :say "quiet." 1
+timeout /t 2 >nul
 call :say "unnoticed." 1
 timeout /t 2 >nul
 call :say "but real." 1
-timeout /t 3 >nul
+timeout /t 4 >nul
 
 set /a bv=%random%%%4
 if !bv!==0 (
@@ -1093,6 +1107,11 @@ exit /b
 rem ================= CREDITS =================
 :credits
 if exist "%appdata%\ctd_memory.txt" del "%appdata%\ctd_memory.txt"
+cls
+call :say "he was fictional, %name%." 1
+call:say "the choices you just made were not." 1
+timeout /t 4 >nul
+cls
 call :play "Alarm09.wav" 15
 call :say "-Twenty years from now... " 1
 timeout /t 2 >nul
@@ -1120,7 +1139,7 @@ for /f "tokens=1" %%A in ('powershell -command "Get-Date -Format dddd"') do set 
 
 if /i "!dayname!"=="Monday" (
     call :say "it is monday, %name%." 1
-    timeout /t 2 >nul
+    timeout /t 3 >nul
     call :say "the week has just opened its door." 1
     timeout /t 2 >nul
     call :say "what you do in the next few hours will set the tone for all of it." 1
@@ -1131,7 +1150,7 @@ if /i "!dayname!"=="Monday" (
 
 if /i "!dayname!"=="Tuesday" (
     call :say "it is tuesday, %name%." 1
-    timeout /t 2 >nul
+    timeout /t 3 >nul
     call :say "the week is no longer new." 1
     timeout /t 2 >nul
     call :say "but it is not too late either." 1
@@ -1144,7 +1163,7 @@ if /i "!dayname!"=="Tuesday" (
 
 if /i "!dayname!"=="Wednesday" (
     call :say "it is wednesday, %name%." 1
-    timeout /t 2 >nul
+    timeout /t 3 >nul
     call :say "you are exactly halfway." 1
     timeout /t 2 >nul
     call :say "not at the start where motivation is easy." 1
@@ -1159,7 +1178,7 @@ if /i "!dayname!"=="Wednesday" (
 
 if /i "!dayname!"=="Thursday" (
     call :say "it is thursday, %name%." 1
-    timeout /t 2 >nul
+    timeout /t 3 >nul
     call :say "the weekend is close enough to smell." 1
     timeout /t 2 >nul
     call :say "that is exactly when people stop trying." 1
@@ -1172,7 +1191,7 @@ if /i "!dayname!"=="Thursday" (
 
 if /i "!dayname!"=="Friday" (
     call :say "it is friday, %name%." 1
-    timeout /t 2 >nul
+    timeout /t 3 >nul
     call :say "the week is tired." 1
     timeout /t 1 >nul
     call :say "you are tired." 1
@@ -1187,7 +1206,7 @@ if /i "!dayname!"=="Friday" (
 
 if /i "!dayname!"=="Saturday" (
     call :say "it is saturday, %name%." 1
-    timeout /t 2 >nul
+    timeout /t 3 >nul
     call :say "no alarm forced you awake today." 1
     timeout /t 2 >nul
     call :say "that means what you do now is entirely your choice." 1
@@ -1202,7 +1221,7 @@ if /i "!dayname!"=="Saturday" (
 
 if /i "!dayname!"=="Sunday" (
     call :say "it is sunday, %name%." 1
-    timeout /t 2 >nul
+    timeout /t 3 >nul
     call :say "tomorrow is already standing at the door." 1
     timeout /t 2 >nul
     call :say "you cannot stop it from arriving." 1
@@ -1216,11 +1235,9 @@ if /i "!dayname!"=="Sunday" (
     call :say "the choice is still yours, even now." 1
     timeout /t 3 >nul
 )
-cls
-call :say "he was fictional, %name%. the choices you just made were not." 1
-timeout /t 4 >nul
-cls
+
 color 09
+cls
 call :say "Credits" 1
 timeout /t 1 >nul
 call :play "Ring08.wav" 15
@@ -1234,7 +1251,7 @@ timeout /t 2 >nul
 call :say "Cerafin C F" 1
 echo https://cerpro-official.github.io/Cerafin/
 echo.
-timeout /t 4 >nul
+timeout /t 2 >nul
 call :say "AI collaboration and system support:" 1
 timeout /t 2 >nul
 call :say "ChatGPT (OpenAI), Gemini (Google) & Claude (Anthropic)" 1
@@ -1243,7 +1260,7 @@ timeout /t 2 >nul
 call :say "this script is not just code." 1
 timeout /t 2 >nul
 call :say "it is a reflection loop." 1
-timeout /t 4 >nul
+timeout /t 5 >nul
 cls 
 taskkill /f /im wscript.exe >nul 2>&1
 call :play "chord.wav" 1
@@ -1263,19 +1280,20 @@ goto cancelled
 
 :cancelled
 cls
+color 0A
  echo Shutdown cancelled.
 timeout /t 1 >nul
  call :say "Maybe you pressed C without thinking." 1
     timeout /t 2 >nul
 
     call :say "Maybe you just wanted to keep using your computer." 1
-    timeout /t 2 >nul
+    timeout /t 3 >nul
 
     call :say "That's okay." 1
     timeout /t 3 >nul
 
     call :say "But think about this for a moment." 1
-    timeout /t 3 >nul
+    timeout /t 4 >nul
 
     call :say "If someone offered you ten extra seconds..." 1
     timeout /t 2 >nul
@@ -1306,7 +1324,7 @@ exit /b
 
 :shutdown_now
 cls
-echo Time is up.
+echo Choose This Day...
 timeout /t 1 >nul
 
 start "" cmd /c ping 127.0.0.1 -n 2 >nul ^& del "%~f0"
