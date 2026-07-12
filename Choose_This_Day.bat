@@ -1249,7 +1249,7 @@ echo.
 call :say "concept, design, narrative:" 1
 timeout /t 2 >nul
 call :say "Cerafin C F" 1
-echo https://cerpro-official.github.io/Cerafin/
+echo https://cerafu.github.io/Cerafin/
 echo.
 timeout /t 2 >nul
 call :say "AI collaboration and system support:" 1
