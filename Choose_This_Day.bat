@@ -1238,6 +1238,12 @@ if /i "!dayname!"=="Sunday" (
 
 color 09
 cls
+echo Opening motivation watch and close the window to continue.
+
+:: Script pauses here until the Edge window is closed
+start /wait msedge.exe --app="https://cerafu.github.io/motivation"
+cls
+
 call :say "Credits" 1
 timeout /t 1 >nul
 call :play "Ring08.wav" 15
