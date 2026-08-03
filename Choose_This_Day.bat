@@ -1238,12 +1238,36 @@ if /i "!dayname!"=="Sunday" (
 
 color 09
 cls
-echo Opening motivation watch and close the window to continue.
 
-:: Script pauses here until the Edge window is closed
-start /wait msedge.exe --app="https://cerafu.github.io/motivation"
+ping -n 1 github.com >nul 2>&1
+
+if errorlevel 1 (
+    echo =====================================================
+    echo            MOTIVATION BREAK SKIPPED
+    echo =====================================================
+    echo.
+    echo No Internet connection detected.
+    echo Continuing...
+    timeout /t 2 >nul
+) else (
+    echo =====================================================
+    echo              MOTIVATION BREAK
+    echo =====================================================
+    echo.
+    echo Opening the motivation player...
+    echo.
+    echo =====================================================
+    echo The motivation player will now open.
+    echo When you are finished,
+    echo return here and press any key to continue.
+    echo =====================================================
+    echo.
+    timeout /t 2 >nul
+    start "" "https://cerafu.github.io/motivation"
+    timeout /t 2 >nul
+    pause >nul
+)
 cls
-
 call :say "Credits" 1
 timeout /t 1 >nul
 call :play "Ring08.wav" 15
