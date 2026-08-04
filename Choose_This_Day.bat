@@ -910,7 +910,36 @@ taskkill /f /im wscript.exe >nul 2>&1
 timeout /t 3 >nul
 color 0F
 pause
+cls
 
+ping -n 1 github.com >nul 2>&1
+
+if errorlevel 1 (
+    echo =====================================================
+    echo            MOTIVATION BREAK SKIPPED
+    echo =====================================================
+    echo.
+    echo No Internet connection detected.
+    echo Continuing...
+    timeout /t 2 >nul
+) else (
+    echo =====================================================
+    echo              MOTIVATION BREAK
+    echo =====================================================
+    echo.
+    echo Opening the motivation player...
+    echo.
+    echo =====================================================
+    echo The motivation player will now open.
+    echo When you are finished,
+    echo return here and press any key to continue.
+    echo =====================================================
+    echo.
+    timeout /t 2 >nul
+    start "" "https://cerafu.github.io/motivation"
+    timeout /t 2 >nul
+    pause >nul
+)
 cls
 call :credits
 exit
@@ -1079,7 +1108,36 @@ color 0F
 timeout /t 3 >nul
 taskkill /f /im wscript.exe >nul 2>&1
 pause
+cls
 
+ping -n 1 github.com >nul 2>&1
+
+if errorlevel 1 (
+    echo =====================================================
+    echo            MOTIVATION BREAK SKIPPED
+    echo =====================================================
+    echo.
+    echo No Internet connection detected.
+    echo Continuing...
+    timeout /t 2 >nul
+) else (
+    echo =====================================================
+    echo              MOTIVATION BREAK
+    echo =====================================================
+    echo.
+    echo Opening the motivation player...
+    echo.
+    echo =====================================================
+    echo The motivation player will now open.
+    echo When you are finished,
+    echo return here and press any key to continue.
+    echo =====================================================
+    echo.
+    timeout /t 2 >nul
+    start "" "https://cerafu.github.io/motivation"
+    timeout /t 2 >nul
+    pause >nul
+)
 cls
 call :credits
 exit
@@ -1237,37 +1295,7 @@ if /i "!dayname!"=="Sunday" (
 )
 
 color 09
-cls
 
-ping -n 1 github.com >nul 2>&1
-
-if errorlevel 1 (
-    echo =====================================================
-    echo            MOTIVATION BREAK SKIPPED
-    echo =====================================================
-    echo.
-    echo No Internet connection detected.
-    echo Continuing...
-    timeout /t 2 >nul
-) else (
-    echo =====================================================
-    echo              MOTIVATION BREAK
-    echo =====================================================
-    echo.
-    echo Opening the motivation player...
-    echo.
-    echo =====================================================
-    echo The motivation player will now open.
-    echo When you are finished,
-    echo return here and press any key to continue.
-    echo =====================================================
-    echo.
-    timeout /t 2 >nul
-    start "" "https://cerafu.github.io/motivation"
-    timeout /t 2 >nul
-    pause >nul
-)
-cls
 call :say "Credits" 1
 timeout /t 1 >nul
 call :play "Ring08.wav" 15
