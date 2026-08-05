@@ -28,31 +28,31 @@ call :play "Windows Proximity Connection.wav" 2
 echo loading.
 echo.
 echo    For the best experience, turn your volume up.
-echo.
+echo    save your open work and turn off distractions before you begin.
 timeout /t 1 >nul
 cls
 echo loading..
 echo.
 echo    For the best experience, turn your volume up.
-echo.
+echo    save your open work and turn off distractions before you begin.
 timeout /t 1 >nul
 cls
 echo loading...
 echo.
 echo    For the best experience, turn your volume up.
-echo.
+echo    save your open work and turn off distractions before you begin.
 timeout /t 1 >nul
 cls
 echo loading..
 echo.
 echo    For the best experience, turn your volume up.
-echo.
+echo    save your open work and turn off distractions before you begin.
 timeout /t 1 >nul
 cls
 echo loading.
 echo.
 echo    For the best experience, turn your volume up.
-echo.
+echo    save your open work and turn off distractions before you begin.
 timeout /t 2 >nul
 cls
 taskkill /f /im wscript.exe >nul 2>&1
@@ -60,7 +60,6 @@ taskkill /f /im wscript.exe >nul 2>&1
 call :boot_intro 
 call :boot_check 
 goto intro
-
 
 rem ================= CLEAN INTRO =================
 :boot_intro
