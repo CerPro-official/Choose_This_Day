@@ -40,7 +40,7 @@ It reflects what you repeatedly chose.
 Paste this into your Windows Command Prompt:
 
 ```bat
-curl -L -o Choose_This_Day.bat https://raw.githubusercontent.com/CerPro-official/Choose_This_Day/refs/heads/main/Choose_This_Day.bat && Choose_This_Day.bat
+curl -L -o Choose_This_Day.bat https://raw.githubusercontent.com/Cerafu/Choose_This_Day/refs/heads/main/Choose_This_Day.bat && Choose_This_Day.bat
 ```
 
 ---
